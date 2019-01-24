@@ -1,5 +1,5 @@
 <h1 align="center"> 
-  <img width="500" src="../.docs/log/v3/logo-v3-literal-partial-colored.png" alt="Impulse">
+  <img width="500" src="../.docs/logo/v3/logo-v3-literal-partial-colored.png" alt="Impulse">
 </h1>
 
 <h3 align="center">

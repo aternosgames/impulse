@@ -35,7 +35,7 @@ Feel free to wrap code if it does help with readability.
 #### Indentation
 We are using 2 spaces for indentations.
 
-<img src="/.docs/assets/naah.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/naah.png" align="left" width="80" height="80"/>
 
 ```java
  public class Hello {
@@ -51,7 +51,7 @@ We are using 2 spaces for indentations.
  }
 ```
 
-<img src="/.docs/assets/yeeh.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
 
 
 ```java
@@ -72,7 +72,7 @@ We are using 2 spaces for indentations.
 #### Blank lines
 Place a blank line before the first member of a class, interface, enum, etc. as well as after the last member.
 
-<img src="/.docs/assets/naah.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/naah.png" align="left" width="80" height="80"/>
 
 ```java
 public class HelloWorld {
@@ -84,7 +84,7 @@ public class HelloWorld {
 }
 ```
 
-<img src="/.docs/assets/naah.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/naah.png" align="left" width="80" height="80"/>
 
 ```java
 public class HelloWorld {
@@ -97,7 +97,7 @@ public class HelloWorld {
 }
 ```
 
-<img src="/.docs/assets/naah.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/naah.png" align="left" width="80" height="80"/>
 
 ```java
 public class HelloWorld {
@@ -110,7 +110,7 @@ public class HelloWorld {
 }
 ```
 
-<img src="/.docs/assets/yeeh.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
 
 ```java
 public class HelloWorld {
@@ -151,7 +151,7 @@ If you are using our code style scheme for IntelliJ IDEA then the license header
 
 Blank lines represent actual blank lines between the import statements.
 
-<img src="/.docs/assets/naah.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/naah.png" align="left" width="80" height="80"/>
 
 ```java
 import com.google.guava.A;
@@ -173,7 +173,7 @@ import static io.impulsecloud.ABC.CONSTANT1;
 import static io.impulsecloud.ABC.CONSTANT2;
 ```
 
-<img src="/.docs/assets/yeeh.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
 
 ```java
 import static io.impulsecloud.ABC.CONSTANT1;
@@ -202,7 +202,7 @@ import javax.annotation.*;
 #### Exception handling
 Exceptions which are ignored, name the exception variable `ignored`.
 
-<img src="/.docs/assets/naah.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/naah.png" align="left" width="80" height="80"/>
 
 ```java
 try {
@@ -212,7 +212,7 @@ try {
 }
 ```
 
-<img src="/.docs/assets/yeeh.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
 
 ```java
 try {
@@ -226,7 +226,7 @@ try {
 - All local class fields and functions should be accessed using `this` (`this.name = name;`) 
 - If you access a superclass field or function use `super` (`super.xyz();`) as long you are not overriding that function
 
-<img src="/.docs/assets/naah.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/naah.png" align="left" width="80" height="80"/>
 
 ```java
 public class A {
@@ -253,7 +253,7 @@ public class B extends A {
 }
 ```
 
-<img src="/.docs/assets/yeeh.png" align="left" width="80" height="80"/>
+<img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
 
 ```java
 public class A {
