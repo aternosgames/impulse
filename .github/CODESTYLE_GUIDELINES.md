@@ -76,11 +76,11 @@ Place a blank line before the first member of a class, interface, enum, etc. as 
 
 ```java
 public class HelloWorld {
-    private String meow;
+  private String meow;
     
-    public void foo() {
-        System.out.println("Pink fluffy unicors...");
-    }
+  public void foo() {
+    System.out.println("Pink fluffy unicors...");
+  }
 }
 ```
 
@@ -89,11 +89,11 @@ public class HelloWorld {
 ```java
 public class HelloWorld {
 
-    private String meow;
+  private String meow;
     
-    public void foo() {
-        System.out.println("Pink fluffy unicors...");
-    }
+  public void foo() {
+    System.out.println("Pink fluffy unicors...");
+  }
 }
 ```
 
@@ -101,11 +101,11 @@ public class HelloWorld {
 
 ```java
 public class HelloWorld {
-    private String meow;
+  private String meow;
     
-    public void foo() {
-        System.out.println("Pink fluffy unicors...");
-    }
+  public void foo() {
+    System.out.println("Pink fluffy unicors...");
+  }
     
 }
 ```
@@ -115,11 +115,11 @@ public class HelloWorld {
 ```java
 public class HelloWorld {
 
-    private String meow;
+  private String meow;
     
-    public void foo() {
-        System.out.println("Pink fluffy unicors...");
-    }
+  public void foo() {
+    System.out.println("Pink fluffy unicors...");
+  }
     
 }
 ```
