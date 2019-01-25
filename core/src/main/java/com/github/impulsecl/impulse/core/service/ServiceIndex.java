@@ -5,7 +5,6 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 public class ServiceIndex {
@@ -26,19 +25,6 @@ public class ServiceIndex {
     }
   }
 
-  @NonNull
-  public Optional<ServiceIndexRecord> getRecord(@NonNull String serviceCommand) {
-    Require.requireParamNonNull(serviceCommand, "serviceCommand");
-
-    for (ServiceIndexRecord serviceIndexRecord : getRecords()) {
-      if (serviceIndexRecord.getServiceCommand().equalsIgnoreCase(serviceCommand)) {
-        return Optional.of(serviceIndexRecord);
-      }
-    }
-
-    return Optional.empty();
-  }
-
   private void registerRecord(@NonNull ServiceIndexRecord serviceIndexRecord) {
     Require.requireParamNonNull(serviceIndexRecord, "serviceIndexRecord");
 
@@ -46,7 +32,7 @@ public class ServiceIndex {
   }
 
   @NonNull
-  private Collection<ServiceIndexRecord> getRecords() {
+  public Collection<ServiceIndexRecord> getRecords() {
     return Collections.unmodifiableCollection(RECORDS);
   }
 

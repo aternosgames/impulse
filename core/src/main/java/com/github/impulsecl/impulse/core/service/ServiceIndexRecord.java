@@ -10,6 +10,7 @@ public final class ServiceIndexRecord {
 
   private String name;
   private String serviceCommand;
+  private String description;
   private Class<?> serviceClass;
 
   public ServiceIndexRecord(@NonNull Class<?> serviceClass, boolean disposeException) {
@@ -30,6 +31,7 @@ public final class ServiceIndexRecord {
     this.serviceClass = serviceClass;
     this.name = rawMetadata.name();
     this.serviceCommand = rawMetadata.serviceCommand();
+    this.description = rawMetadata.description();
   }
 
   @NonNull
@@ -40,6 +42,11 @@ public final class ServiceIndexRecord {
   @NonNull
   public String getServiceCommand() {
     return this.serviceCommand;
+  }
+
+  @NonNull
+  public String getDescription() {
+    return this.description;
   }
 
   @NonNull

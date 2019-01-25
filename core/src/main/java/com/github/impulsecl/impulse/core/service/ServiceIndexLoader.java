@@ -25,11 +25,17 @@ final class ServiceIndexLoader {
   @NonNull
   Collection<ServiceIndexRecord> loadServices() {
     File servicesDirectory = new File("services");
+
+    if (!servicesDirectory.exists()) {
+      servicesDirectory.mkdir();
+    }
+
     File[] serviceJarFiles = servicesDirectory.listFiles(file -> file.getName().endsWith(".jar"));
     List<ServiceIndexRecord> loadedRecords = new ArrayList<>();
 
-    // TODO Do not use asserts for state checking
-    assert serviceJarFiles != null;
+    if (serviceJarFiles == null) {
+      return loadedRecords;
+    }
 
     for (File serviceJarFile : serviceJarFiles) {
       try (JarFile jarFile = new JarFile(serviceJarFile)) {
@@ -52,7 +58,8 @@ final class ServiceIndexLoader {
             }
 
             Class<?> clazz;
-            String targetClassName = jarEntry.getName().substring(0, jarEntry.getName().length() - 6)
+            String targetClassName = jarEntry.getName()
+                .substring(0, jarEntry.getName().length() - 6)
                 .replace("/", ".");
 
             try {
