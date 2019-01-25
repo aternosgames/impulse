@@ -1,5 +1,6 @@
 package com.github.impulsecl.impulse.launcher;
 
+import com.github.impulsecl.impulse.common.semantic.Messages;
 import com.github.impulsecl.impulse.core.service.Service;
 import com.github.impulsecl.impulse.core.service.ServiceIndex;
 import com.github.impulsecl.impulse.core.service.ServiceIndexRecord;
@@ -13,48 +14,35 @@ import org.apache.commons.cli.ParseException;
 
 public class LauncherApplication {
 
-  private static final ServiceIndex SERVICE_INDEX = ServiceIndex.create();
-  private static final ServiceInvoker SERVICE_INVOKER = ServiceInvoker.create();
-
   public static void main(String[] arguments) {
-    System.out.println("\n"
-        + "            /\\\n"
-        + "           /::\\\n"
-        + "          /+hh+\\\n"
-        + "         /hhsss+\\\n"
-        + "        /+hh/\\ssh\\                 ^^\n"
-        + " ,,,,,,/oss/  \\:os\\    ,,,,,,,,,,;/^|\\\n"
-        + " oshdsshms/    \\.+s\\  /dhssmyssmo++-/\n"
-        + " `````````      \\:dd\\/osd/``````````\n"
-        + "                 \\ddsood/\n"
-        + "                  \\dood/\n"
-        + "                   \\::/\n"
-        + "                    \\/");
-    SERVICE_INDEX.registerRecordRecursive();
+    System.out.println(Messages.getImpulseAsciiLogo());
 
+    ServiceIndex serviceIndex = ServiceIndex.create();
+    ServiceInvoker serviceInvoker = ServiceInvoker.create();
     Options options = new Options();
 
-    for (ServiceIndexRecord serviceIndexRecord : SERVICE_INDEX.getRecords()) {
-      options.addOption(serviceIndexRecord.getServiceCommand(), false,
-          serviceIndexRecord.getDescription());
+    serviceIndex.registerRecordRecursive();
+
+    for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
+      options.addOption(serviceIndexRecord.getServiceCommand(), false, serviceIndexRecord.getDescription());
     }
 
     try {
       CommandLineParser commandLineParser = new DefaultParser();
       CommandLine commandLine = commandLineParser.parse(options, arguments);
 
-      for (ServiceIndexRecord serviceIndexRecord : SERVICE_INDEX.getRecords()) {
+      for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
         if (commandLine.hasOption(serviceIndexRecord.getServiceCommand())) {
 
-          Optional<Service> optionalService = SERVICE_INVOKER
-              .invokeService(serviceIndexRecord.getServiceClass());
+          Optional<Service> optionalService = serviceInvoker.invokeService(serviceIndexRecord.getServiceClass());
 
           if (optionalService.isPresent()) {
             Service service = optionalService.get();
             service.start();
 
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> service.stop()));
+            Runtime.getRuntime().addShutdownHook(new Thread(service::stop));
 
+            // TODO Replace while-loop with an actual server which blocks until shutdown
             while (true) {
               try {
                 Thread.sleep(500);
