@@ -2,11 +2,20 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <name>Impulse Root</name>
+  <description>A hybrid Minecraft server orchestration software</description>
+  <inceptionYear>2019</inceptionYear>
+
   <groupId>com.github.impulsecl</groupId>
   <artifactId>impulse</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  
-  <name>Impulse Root</name>
-  <description>A hybrid Minecraft server orchestration software</description>
+
+  <modules>
+    <module>daemon</module>
+  </modules>
+
+  <build>
+    <defaultGoal>clean install</defaultGoal>
+  </build>
 </project>
