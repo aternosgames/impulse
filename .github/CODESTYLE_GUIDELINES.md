@@ -174,16 +174,16 @@ import static io.impulsecloud.ABC.CONSTANT2;
 <img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
 
 ```java
-import static io.impulsecloud.ABC.CONSTANT1;
-import static io.impulsecloud.ABC.CONSTANT2;
+import static com.github.impulsecl.impulse.ABC.CONSTANT1;
+import static com.github.impulsecl.impulse.ABC.CONSTANT2;
 
 import static org.bukkit.Material.WOOD;
 import static org.bukkit.Material.WOOL;
 
-import io.impulsecloud.core.AB;
-import io.impulsecloud.core.AD;
-import io.impulsecloud.core.AF;
-import io.impulsecloud.core.AEE;
+import com.github.impulsecl.impulse.core.AB;
+import com.github.impulsecl.impulse.core.AD;
+import com.github.impulsecl.impulse.core.AF;
+import com.github.impulsecl.impulse.core.AEE;
 
 import com.google.guava.A;
 import com.google.guava.B;
