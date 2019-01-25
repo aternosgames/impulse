@@ -21,7 +21,7 @@ public class ServiceInvoker {
     return Optional.empty();
   }
 
-  static ServiceInvoker create() {
+  public static ServiceInvoker create() {
     return new ServiceInvoker();
   }
 
