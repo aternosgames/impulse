@@ -20,6 +20,7 @@ Now, there are actually some projects that atleast _try_ to solve the named prob
 doing so is arguable. To name a few of them: 
 * [CloudNet](https://github.com/CloudNetService/CloudNet) _(open source)_
 * [TimoCloud](https://github.com/TimoCloud/TimoCloud) _(open source)_
+* [KlarCloud](https://gitlab.com/_Klaro/KlarCloudService-2.0) _(open source)_
 * [CentauriCloud](https://github.com/CentauriCloud/CentauriCloud) _(open source, inactive)_
 * [CloudSystemIO](https://cloudsystem.io/) _(paid)_
 * [CaveCloud](https://cavecloud.net/) _(paid)_
