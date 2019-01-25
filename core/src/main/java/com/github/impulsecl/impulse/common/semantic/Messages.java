@@ -10,14 +10,14 @@ public class Messages {
   private static final String FIELD_NULL = "Field \"%s\" cannot be null";
 
   private static final String PARAMETER_SIGNED_NUMBER
-      = "Parameter \"%s\" is required to be a signed %s [%s]";
+      = "Parameter \"%s\" is required to be a signed %s [value=%s]";
   private static final String PARAMETER_UNSIGNED_NUMBER
-      = "Parameter \"%s\" is required to be an unsigned %s [%s]";
+      = "Parameter \"%s\" is required to be an unsigned %s [value=%s]";
 
   private static final String FIELD_SIGNED_NUMBER
-      = "Field \"%s\" is required to be a signed %s [%s]";
+      = "Field \"%s\" is required to be a signed %s [value=%s]";
   private static final String FIELD_UNSIGNED_NUMBER
-      = "Field \"%s\" is required to be an unsigned %s [%s]";
+      = "Field \"%s\" is required to be an unsigned %s [value=%s]";
 
   @CheckReturnValue
   public static String parameterNull(@NonNull String name) {

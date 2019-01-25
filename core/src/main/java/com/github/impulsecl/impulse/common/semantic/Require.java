@@ -27,7 +27,6 @@ import static com.github.impulsecl.impulse.common.semantic.Messages.unsignedLong
 import static com.github.impulsecl.impulse.common.semantic.Messages.unsignedShortField;
 import static com.github.impulsecl.impulse.common.semantic.Messages.unsignedShortParam;
 
-import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.Objects;
 
@@ -52,21 +51,15 @@ public class Require {
     }
   }
 
-  public static <T extends Number> T requireParamSignedNumber(@NonNull T input,
-      @NonNull String name) {
+  public static <T extends Number> T requireParamSignedNumber(@NonNull T input, @NonNull String name) {
     return requireSignedNumber(input, name, Type.PARAMETER);
   }
 
-  public static <T extends Number> T requireFieldSignedNumber(@NonNull T input,
-      @NonNull String name) {
+  public static <T extends Number> T requireFieldSignedNumber(@NonNull T input, @NonNull String name) {
     return requireSignedNumber(input, name, Type.FIELD);
   }
 
-  public static <T extends Number> T requireSignedNumber(
-      @NonNull T input,
-      @NonNull String name,
-      @NonNull Type type
-  ) {
+  public static <T extends Number> T requireSignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
     requireNonNull(input, "input", Type.PARAMETER);
     requireNonNull(name, "name", Type.PARAMETER);
 
@@ -106,12 +99,7 @@ public class Require {
     return input;
   }
 
-  @CheckReturnValue
-  public static <T extends Number> T requireUnsignedNumber(
-      @NonNull T input,
-      @NonNull String name,
-      @NonNull Type type
-  ) {
+  public static <T extends Number> T requireUnsignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
     requireNonNull(input, "input", Type.PARAMETER);
     requireNonNull(name, "name", Type.PARAMETER);
 
