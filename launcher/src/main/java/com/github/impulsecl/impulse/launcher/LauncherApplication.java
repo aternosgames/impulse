@@ -14,30 +14,27 @@ import org.apache.commons.cli.ParseException;
 
 public class LauncherApplication {
 
-  private static final ServiceIndex SERVICE_INDEX = ServiceIndex.create();
-  private static final ServiceInvoker SERVICE_INVOKER = ServiceInvoker.create();
-
   public static void main(String[] arguments) {
     System.out.println(Messages.getImpulseAsciiLogo());
 
-    SERVICE_INDEX.registerRecordRecursive();
-
+    ServiceIndex serviceIndex = ServiceIndex.create();
+    ServiceInvoker serviceInvoker = ServiceInvoker.create();
     Options options = new Options();
 
-    for (ServiceIndexRecord serviceIndexRecord : SERVICE_INDEX.getRecords()) {
-      options.addOption(serviceIndexRecord.getServiceCommand(), false,
-          serviceIndexRecord.getDescription());
+    serviceIndex.registerRecordRecursive();
+
+    for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
+      options.addOption(serviceIndexRecord.getServiceCommand(), false, serviceIndexRecord.getDescription());
     }
 
     try {
       CommandLineParser commandLineParser = new DefaultParser();
       CommandLine commandLine = commandLineParser.parse(options, arguments);
 
-      for (ServiceIndexRecord serviceIndexRecord : SERVICE_INDEX.getRecords()) {
+      for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
         if (commandLine.hasOption(serviceIndexRecord.getServiceCommand())) {
 
-          Optional<Service> optionalService = SERVICE_INVOKER
-              .invokeService(serviceIndexRecord.getServiceClass());
+          Optional<Service> optionalService = serviceInvoker.invokeService(serviceIndexRecord.getServiceClass());
 
           if (optionalService.isPresent()) {
             Service service = optionalService.get();
