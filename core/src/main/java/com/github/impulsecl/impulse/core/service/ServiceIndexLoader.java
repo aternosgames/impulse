@@ -1,5 +1,6 @@
 package com.github.impulsecl.impulse.core.service;
 
+import com.github.impulsecl.impulse.core.service.annotation.ServiceMetadata;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -38,6 +39,7 @@ final class ServiceIndexLoader {
 
         LOGGER.info("Creating the " + path.toFile().getName() + " file...");
 
+      }
         Files.list(Paths.get("services")).forEach(servicePath -> {
 
           try (JarFile jarFile = new JarFile(servicePath.toFile())) {
@@ -70,7 +72,7 @@ final class ServiceIndexLoader {
                   throw new RuntimeException(cause);
                 }
 
-                if (clazz.isAssignableFrom(Service.class)) {
+                if (clazz.isAnnotationPresent(ServiceMetadata.class)) {
                   ServiceIndexRecord serviceIndexRecord = new ServiceIndexRecord(clazz, true);
                   loadedRecords.add(serviceIndexRecord);
                 }
@@ -82,7 +84,7 @@ final class ServiceIndexLoader {
             cause.printStackTrace();
           }
         });
-      }
+
     } catch (IOException cause) {
       cause.printStackTrace();
     }
