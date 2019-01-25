@@ -2,7 +2,7 @@
 We follow Google’s Java code style guidelines with a few additions and modifications, which are described herein.
 Please follow the code style guideline as it is important to keep readability, maintainability and consistency.
 
-#### Function block complexicity
+#### Function block complexity
 To maintain this huge codebase it is required to keep a cool head and mind. For maintain- and readability reasons we came up
 with the decision that any function block has a limit of 50 lines.
 
