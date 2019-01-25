@@ -25,8 +25,8 @@ public class BlueprintConfig {
     this.version = BlueprintConfig.VERSION;
     this.runOnDeployment = "undefined";
     this.runAfterKill = "undefined";
-    this.environment = Environment.create();
-    this.settings = Settings.create();
+    this.environment = new Environment();
+    this.settings = new Settings();
   }
 
   @NonNull
@@ -77,12 +77,7 @@ public class BlueprintConfig {
     return this.settings;
   }
 
-  public static class Environment {
-
-    @CheckReturnValue
-    public static Environment create() {
-      return new Environment();
-    }
+  public class Environment {
 
     private Map<String, Object> variables;
 
@@ -101,14 +96,14 @@ public class BlueprintConfig {
       return this.variables;
     }
 
+    @NonNull
+    public BlueprintConfig back() {
+      return BlueprintConfig.this;
+    }
+
   }
 
-  public static class Settings {
-
-    @CheckReturnValue
-    public static Settings create() {
-      return new Settings();
-    }
+  public class Settings {
 
     private boolean preserveFilesOnCrash;
 
@@ -124,6 +119,11 @@ public class BlueprintConfig {
 
     public boolean preserveFilesOnCrash() {
       return this.preserveFilesOnCrash;
+    }
+
+    @NonNull
+    public BlueprintConfig back() {
+      return BlueprintConfig.this;
     }
 
   }
