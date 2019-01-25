@@ -10,8 +10,11 @@ import java.util.Set;
 public class ServiceIndex {
 
   private static final ServiceIndexLoader SERVICE_INDEX_LOADER = ServiceIndexLoader.create();
-
   private static final Set<ServiceIndexRecord> RECORDS = new HashSet<>();
+
+  public static ServiceIndex create() {
+    return new ServiceIndex();
+  }
 
   private void registerRecord(ServiceIndexRecord serviceIndexRecord) {
     Preconditions.checkNotNull(serviceIndexRecord, "ServiceIndexRecord cannot be null!");
@@ -42,10 +45,6 @@ public class ServiceIndex {
 
   private Collection<ServiceIndexRecord> getRecords() {
     return Collections.unmodifiableCollection(RECORDS);
-  }
-
-  static ServiceIndex create() {
-    return new ServiceIndex();
   }
 
 }
