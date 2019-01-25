@@ -14,8 +14,12 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 final class ServiceIndexLoader {
+
+  private static final Logger LOGGER = LogManager.getLogger(ServiceIndexLoader.class);
 
   @NonNull
   static ServiceIndexLoader create() {
@@ -27,7 +31,12 @@ final class ServiceIndexLoader {
     File servicesDirectory = new File("services");
 
     if (!servicesDirectory.exists()) {
-      servicesDirectory.mkdir();
+      boolean successfullyFileCreated = servicesDirectory.mkdir();
+
+      if (!successfullyFileCreated) {
+        LOGGER.error("Impulse does not have the permission to create a folder!");
+
+      }
     }
 
     File[] serviceJarFiles = servicesDirectory.listFiles(file -> file.getName().endsWith(".jar"));
