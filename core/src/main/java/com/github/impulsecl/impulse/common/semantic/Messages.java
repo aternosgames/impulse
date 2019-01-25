@@ -6,6 +6,20 @@ import java.util.Objects;
 
 public class Messages {
 
+  private static final String IMPULSE_ASCII_LOGO = "\n"
+      + "            /\\\n"
+      + "           /::\\\n"
+      + "          /+hh+\\\n"
+      + "         /hhsss+\\\n"
+      + "        /+hh/\\ssh\\                 ^^\n"
+      + " ,,,,,,/oss/  \\:os\\    ,,,,,,,,,,;/^|\\\n"
+      + " oshdsshms/    \\.+s\\  /dhssmyssmo++-/\n"
+      + " `````````      \\:dd\\/osd/``````````\n"
+      + "                 \\ddsood/\n"
+      + "                  \\dood/\n"
+      + "                   \\::/\n"
+      + "                    \\/";
+
   private static final String PARAMETER_NULL = "Parameter \"%s\" cannot be null";
   private static final String FIELD_NULL = "Field \"%s\" cannot be null";
 
@@ -18,6 +32,10 @@ public class Messages {
       = "Field \"%s\" is required to be a signed %s [value=%s]";
   private static final String FIELD_UNSIGNED_NUMBER
       = "Field \"%s\" is required to be an unsigned %s [value=%s]";
+
+  public static String getImpulseAsciiLogo() {
+    return IMPULSE_ASCII_LOGO;
+  }
 
   @CheckReturnValue
   public static String parameterNull(@NonNull String name) {

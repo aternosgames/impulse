@@ -1,5 +1,6 @@
 package com.github.impulsecl.impulse.launcher;
 
+import com.github.impulsecl.impulse.common.semantic.Messages;
 import com.github.impulsecl.impulse.core.service.Service;
 import com.github.impulsecl.impulse.core.service.ServiceIndex;
 import com.github.impulsecl.impulse.core.service.ServiceIndexRecord;
@@ -17,19 +18,8 @@ public class LauncherApplication {
   private static final ServiceInvoker SERVICE_INVOKER = ServiceInvoker.create();
 
   public static void main(String[] arguments) {
-    System.out.println("\n"
-        + "            /\\\n"
-        + "           /::\\\n"
-        + "          /+hh+\\\n"
-        + "         /hhsss+\\\n"
-        + "        /+hh/\\ssh\\                 ^^\n"
-        + " ,,,,,,/oss/  \\:os\\    ,,,,,,,,,,;/^|\\\n"
-        + " oshdsshms/    \\.+s\\  /dhssmyssmo++-/\n"
-        + " `````````      \\:dd\\/osd/``````````\n"
-        + "                 \\ddsood/\n"
-        + "                  \\dood/\n"
-        + "                   \\::/\n"
-        + "                    \\/");
+    System.out.println(Messages.getImpulseAsciiLogo());
+
     SERVICE_INDEX.registerRecordRecursive();
 
     Options options = new Options();
@@ -53,8 +43,9 @@ public class LauncherApplication {
             Service service = optionalService.get();
             service.start();
 
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> service.stop()));
+            Runtime.getRuntime().addShutdownHook(new Thread(service::stop));
 
+            // TODO Replace while-loop with an actual server which blocks until shutdown
             while (true) {
               try {
                 Thread.sleep(500);
