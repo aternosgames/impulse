@@ -155,10 +155,10 @@ Blank lines represent actual blank lines between the import statements.
 import com.google.guava.A;
 import com.google.guava.B;
 import com.google.guava.C;
-import io.impulsecloud.core.AB;
-import io.impulsecloud.core.AD;
-import io.impulsecloud.core.AF;
-import io.impulsecloud.core.AEE;
+import com.github.impulsecl.impulse.core.AB;
+import com.github.impulsecl.impulse.core.AD;
+import com.github.impulsecl.impulse.core.AF;
+import com.github.impulsecl.impulse.core.AEE;
 import java.util.X;
 import java.util.Y;
 import java.util.Z;
@@ -167,8 +167,8 @@ import java.util.Deedelu;
 
 import static org.bukkit.Material.WOOD;
 import static org.bukkit.Material.WOOL;
-import static io.impulsecloud.ABC.CONSTANT1;
-import static io.impulsecloud.ABC.CONSTANT2;
+import static com.github.impulsecl.impulse.ABC.CONSTANT1;
+import static com.github.impulsecl.impulse.ABC.CONSTANT2;
 ```
 
 <img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
