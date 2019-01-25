@@ -17,6 +17,19 @@ public class LauncherApplication {
   private static final ServiceInvoker SERVICE_INVOKER = ServiceInvoker.create();
 
   public static void main(String[] arguments) {
+    System.out.println("\n"
+        + "            /\\\n"
+        + "           /::\\\n"
+        + "          /+hh+\\\n"
+        + "         /hhsss+\\\n"
+        + "        /+hh/\\ssh\\                 ^^\n"
+        + " ,,,,,,/oss/  \\:os\\    ,,,,,,,,,,;/^|\\\n"
+        + " oshdsshms/    \\.+s\\  /dhssmyssmo++-/\n"
+        + " `````````      \\:dd\\/osd/``````````\n"
+        + "                 \\ddsood/\n"
+        + "                  \\dood/\n"
+        + "                   \\::/\n"
+        + "                    \\/");
     SERVICE_INDEX.registerRecordRecursive();
 
     Options options = new Options();
