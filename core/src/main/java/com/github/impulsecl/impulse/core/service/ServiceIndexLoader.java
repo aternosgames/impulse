@@ -1,5 +1,6 @@
 package com.github.impulsecl.impulse.core.service;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -13,20 +14,25 @@ import java.util.jar.JarFile;
 
 final class ServiceIndexLoader {
 
-  Collection<ServiceIndexRecord> loadServices() {
-    List<ServiceIndexRecord> serviceCollection = new ArrayList<>();
+  @NonNull
+  static ServiceIndexLoader create() {
+    return new ServiceIndexLoader();
+  }
 
+  @NonNull
+  Collection<ServiceIndexRecord> loadServices() {
     File servicesDirectory = new File("services");
     File[] serviceJarFiles = servicesDirectory.listFiles(file -> file.getName().endsWith(".jar"));
+    List<ServiceIndexRecord> loadedRecords = new ArrayList<>();
 
+    // TODO Do not use asserts for state checking
     assert serviceJarFiles != null;
 
-    for (File file : serviceJarFiles) {
+    for (File serviceJarFile : serviceJarFiles) {
       try {
-        JarFile jarFile = new JarFile(file);
+        JarFile jarFile = new JarFile(serviceJarFile);
         Enumeration<JarEntry> jarEntryEnumeration = jarFile.entries();
-
-        URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{file.toURI().toURL()});
+        URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{serviceJarFile.toURI().toURL()});
 
         while (jarEntryEnumeration.hasMoreElements()) {
           JarEntry jarEntry = jarEntryEnumeration.nextElement();
@@ -35,27 +41,20 @@ final class ServiceIndexLoader {
             continue;
           }
 
-          String targetClassName = jarEntry.getName().substring(0, jarEntry.getName().length() - 6)
-              .replace("/", ".");
-
+          String targetClassName = jarEntry.getName().substring(0, jarEntry.getName().length() - 6).replace("/", ".");
           Class<?> clazz = urlClassLoader.loadClass(targetClassName);
 
           if (clazz.isAssignableFrom(Service.class)) {
             ServiceIndexRecord serviceIndexRecord = new ServiceIndexRecord(clazz, true);
-            serviceCollection.add(serviceIndexRecord);
+            loadedRecords.add(serviceIndexRecord);
           }
-
         }
       } catch (IOException | ClassNotFoundException cause) {
         cause.printStackTrace();
       }
     }
 
-    return serviceCollection;
-  }
-
-  static ServiceIndexLoader create() {
-    return new ServiceIndexLoader();
+    return loadedRecords;
   }
 
 }

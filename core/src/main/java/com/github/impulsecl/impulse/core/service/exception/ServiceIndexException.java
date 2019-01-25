@@ -5,4 +5,5 @@ public class ServiceIndexException extends RuntimeException {
   public ServiceIndexException(String message) {
     super(message);
   }
+
 }

@@ -1,8 +1,9 @@
 package com.github.impulsecl.impulse.core.service;
 
+import com.github.impulsecl.impulse.common.semantic.Require;
 import com.github.impulsecl.impulse.core.service.annotation.ServiceMetadata;
 import com.github.impulsecl.impulse.core.service.exception.ServiceIndexException;
-import com.google.common.base.Preconditions;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.Optional;
 
 public final class ServiceIndexRecord {
@@ -11,17 +12,16 @@ public final class ServiceIndexRecord {
   private String serviceCommand;
   private Class<?> serviceClass;
 
-  public ServiceIndexRecord(Class<?> serviceClass, boolean disposeException) {
-    Preconditions.checkNotNull(serviceClass, "ServiceClass cannot be null!");
+  public ServiceIndexRecord(@NonNull Class<?> serviceClass, boolean disposeException) {
+    Require.requireParamNonNull(serviceClass, "serviceClass");
 
     Optional<ServiceMetadata> metadata = Services.getMetadata(serviceClass);
     if (metadata.isEmpty()) {
       if (!disposeException) {
         throw new ServiceIndexException(
-            serviceClass.getName() + " is missing class type annotation '" + ServiceMetadata.class
-                .getName() + "'");
-
+            serviceClass.getName() + " is missing class type annotation '" + ServiceMetadata.class.getName() + "'");
       }
+
       return;
     }
 
@@ -32,14 +32,17 @@ public final class ServiceIndexRecord {
     this.serviceCommand = rawMetadata.serviceCommand();
   }
 
+  @NonNull
   public String getName() {
     return this.name;
   }
 
+  @NonNull
   public String getServiceCommand() {
     return this.serviceCommand;
   }
 
+  @NonNull
   public Class<?> getServiceClass() {
     return this.serviceClass;
   }

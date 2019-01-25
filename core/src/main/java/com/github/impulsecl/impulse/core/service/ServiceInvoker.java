@@ -1,28 +1,31 @@
 package com.github.impulsecl.impulse.core.service;
 
-import com.google.common.base.Preconditions;
+import com.github.impulsecl.impulse.common.semantic.Require;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 public class ServiceInvoker {
 
-  public Optional<Service> invokeService(Class<?> clazz) {
-    Preconditions.checkNotNull(clazz, "Clazz cannot be null!");
+  @NonNull
+  public static ServiceInvoker create() {
+    return new ServiceInvoker();
+  }
+
+  @NonNull
+  public Optional<Service> invokeService(@NonNull Class<?> clazz) {
+    Require.requireParamNonNull(clazz, "clazz");
 
     try {
-      Service service = (Service) clazz.getDeclaredConstructor().newInstance();
-      return Optional.of(service);
-    } catch (InstantiationException | IllegalAccessException |
-        InvocationTargetException |
-        NoSuchMethodException cause) {
+      return Optional.of((Service) clazz.getDeclaredConstructor().newInstance());
+    } catch (InstantiationException
+        | IllegalAccessException
+        | InvocationTargetException
+        | NoSuchMethodException cause) {
       cause.printStackTrace();
     }
 
     return Optional.empty();
-  }
-
-  public static ServiceInvoker create() {
-    return new ServiceInvoker();
   }
 
 }
