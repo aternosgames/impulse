@@ -28,7 +28,7 @@ to let Git convert them automatically.
 #### Column width
 - JavaDoc: Must not exceed 90 characters per line
 - Comments: Must not exceed 70 characters per line
-- Source code: Must not exceed 100 characters per line
+- Source code: Must not exceed 120 characters per line
 
 Feel free to wrap code if it does help with readability.
 
