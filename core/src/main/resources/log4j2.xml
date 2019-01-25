@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2019, Impulse and its contributors
+  ~
+  ~ This code is licensed under the MIT license found in the
+  ~ LICENSE file in the root directory of this source tree.
+  -->
+
+<Configuration>
+  <Properties>
+    <Property name="log-storage">logs</Property>
+    <Property name="log-archive">${log-storage}/archive</Property>
+    <Property name="defaultRollOverMax">450</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="ConsoleLog" target="SYSTEM_OUT">
+      <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+    </Console>
+
+    <Console name="VerboseConsoleLog" target="SYSTEM_OUT">
+      <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+    </Console>
+
+    <RollingFile append="false"
+      fileName="${log-storage}/latest.log"
+      filePattern="${log-archive}/%d{yyyy-MM-dd}/logfile_%i.gz"
+      immediateFlush="true"
+      name="LogFile">
+      <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+
+      <Policies>
+        <OnStartupTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+        <TimeBasedTriggeringPolicy/>
+      </Policies>
+
+      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+      <DefaultRolloverStrategy fileIndex="4" max="${defaultRollOverMax}"/>
+    </RollingFile>
+
+    <File append="false" fileName="${log-storage}/latest-debug.log" name="DebugLogFile">
+      <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+
+      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+    </File>
+  </Appenders>
+
+  <Scripts>
+    <Script language="nashorn" name="isVerboseLoggingEnabled">
+      <![CDATA[
+                var System = Java.type('java.lang.System'),
+                Boolean = Java.type('java.lang.Boolean');
+
+                Boolean.parseBoolean(System.getProperty('impulse.logging.verbose', 'false'));
+            ]]>
+    </Script>
+  </Scripts>
+
+  <Loggers>
+    <Logger additivity="false" level="all" name="root">
+      <appender-ref ref="LogFile"/>
+      <appender-ref ref="DebugLogFile"/>
+
+      <appender-ref ref="ConsoleLog">
+        <ScriptFilter onMatch="DENY" onMisMatch="ACCEPT">
+          <ScriptRef ref="isVerboseLoggingEnabled"/>
+        </ScriptFilter>
+      </appender-ref>
+
+      <appender-ref ref="VerboseConsoleLog">
+        <ScriptFilter onMatch="ACCEPT" onMisMatch="DENY">
+          <ScriptRef ref="isVerboseLoggingEnabled"/>
+        </ScriptFilter>
+      </appender-ref>
+    </Logger>
+  </Loggers>
+</Configuration>
