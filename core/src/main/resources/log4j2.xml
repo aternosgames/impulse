@@ -43,38 +43,15 @@
 
     <File append="false" fileName="${log-storage}/latest-debug.log" name="DebugLogFile">
       <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
-
       <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
     </File>
   </Appenders>
-
-  <Scripts>
-    <Script language="nashorn" name="isVerboseLoggingEnabled">
-      <![CDATA[
-                var System = Java.type('java.lang.System'),
-                Boolean = Java.type('java.lang.Boolean');
-
-                Boolean.parseBoolean(System.getProperty('impulse.logging.verbose', 'false'));
-            ]]>
-    </Script>
-  </Scripts>
 
   <Loggers>
     <Logger additivity="false" level="all" name="root">
       <appender-ref ref="LogFile"/>
       <appender-ref ref="DebugLogFile"/>
-
-      <appender-ref ref="ConsoleLog">
-        <ScriptFilter onMatch="DENY" onMisMatch="ACCEPT">
-          <ScriptRef ref="isVerboseLoggingEnabled"/>
-        </ScriptFilter>
-      </appender-ref>
-
-      <appender-ref ref="VerboseConsoleLog">
-        <ScriptFilter onMatch="ACCEPT" onMisMatch="DENY">
-          <ScriptRef ref="isVerboseLoggingEnabled"/>
-        </ScriptFilter>
-      </appender-ref>
+      <appender-ref ref="ConsoleLog"/>
     </Logger>
   </Loggers>
 </Configuration>
