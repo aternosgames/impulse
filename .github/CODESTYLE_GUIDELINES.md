@@ -26,7 +26,7 @@ We are using Unix line endings when committing to the Impulse repository. Window
 to let Git convert them automatically. 
 
 #### Column width
-- JavaDoc: Must not exceed 90 chararcters per line
+- JavaDoc: Must not exceed 90 characters per line
 - Comments: Must not exceed 70 characters per line
 - Source code: Must not exceed 100 characters per line
 
