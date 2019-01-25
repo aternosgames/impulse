@@ -20,6 +20,7 @@
   <modules>
     <module>client</module>
     <module>daemon</module>
+    <module>launcher</module>
     <module>swarm</module>
   </modules>
 
