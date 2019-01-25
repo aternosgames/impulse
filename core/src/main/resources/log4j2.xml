@@ -16,12 +16,12 @@
   <Appenders>
     <Console name="ConsoleLog" target="SYSTEM_OUT">
       <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
-      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t/%level] [%logger{1}] %msg%n"/>
     </Console>
 
     <Console name="VerboseConsoleLog" target="SYSTEM_OUT">
       <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
-      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t/%level] [%logger{1}] %msg%n"/>
     </Console>
 
     <RollingFile append="false"
@@ -37,13 +37,13 @@
         <TimeBasedTriggeringPolicy/>
       </Policies>
 
-      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t/%level] [%logger{1}] %msg%n"/>
       <DefaultRolloverStrategy fileIndex="4" max="${defaultRollOverMax}"/>
     </RollingFile>
 
     <File append="false" fileName="${log-storage}/latest-debug.log" name="DebugLogFile">
       <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
-      <PatternLayout pattern="%d{HH:mm:ss} [%t/%level] [%logger{1}] %msg%n"/>
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t/%level] [%logger{1}] %msg%n"/>
     </File>
   </Appenders>
 
