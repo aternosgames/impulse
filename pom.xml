@@ -19,6 +19,8 @@
 
   <modules>
     <module>daemon</module>
+    <module>client</module>
+    <module>swarm</module>
   </modules>
 
   <build>
