@@ -35,7 +35,6 @@ final class ServiceIndexLoader {
 
       if (!successfullyFileCreated) {
         LOGGER.error("Impulse does not have the permission to create a folder!");
-
       }
     }
 
