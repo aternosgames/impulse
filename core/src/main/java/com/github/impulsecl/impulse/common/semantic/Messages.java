@@ -9,11 +9,15 @@ public class Messages {
   private static final String PARAMETER_NULL = "Parameter \"%s\" cannot be null";
   private static final String FIELD_NULL = "Field \"%s\" cannot be null";
 
-  private static final String PARAMETER_SIGNED_NUMBER = "Parameter \"%s\" is required to be a signed %s [%s]";
-  private static final String PARAMETER_UNSIGNED_NUMBER = "Parameter \"%s\" is required to be an unsigned %s [%s]";
+  private static final String PARAMETER_SIGNED_NUMBER
+      = "Parameter \"%s\" is required to be a signed %s [%s]";
+  private static final String PARAMETER_UNSIGNED_NUMBER
+      = "Parameter \"%s\" is required to be an unsigned %s [%s]";
 
-  private static final String FIELD_SIGNED_NUMBER = "Field \"%s\" is required to be a signed %s [%s]";
-  private static final String FIELD_UNSIGNED_NUMBER = "Field \"%s\" is required to be an unsigned %s [%s]";
+  private static final String FIELD_SIGNED_NUMBER
+      = "Field \"%s\" is required to be a signed %s [%s]";
+  private static final String FIELD_UNSIGNED_NUMBER
+      = "Field \"%s\" is required to be an unsigned %s [%s]";
 
   @CheckReturnValue
   public static String parameterNull(@NonNull String name) {
@@ -72,7 +76,8 @@ public class Messages {
 
   @CheckReturnValue
   public static String unsignedIntParam(@NonNull String name, int value) {
-    return String.format(PARAMETER_UNSIGNED_NUMBER, nonNull(name), "integer", String.valueOf(value));
+    return String
+        .format(PARAMETER_UNSIGNED_NUMBER, nonNull(name), "integer", String.valueOf(value));
   }
 
   @CheckReturnValue

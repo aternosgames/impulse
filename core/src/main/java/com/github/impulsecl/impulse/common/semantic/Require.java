@@ -33,17 +33,14 @@ import java.util.Objects;
 
 public class Require {
 
-  @CheckReturnValue
   public static <T> T requireParamNonNull(T input, @NonNull String name) {
     return requireNonNull(input, name, Type.PARAMETER);
   }
 
-  @CheckReturnValue
   public static <T> T requireFieldNonNull(T input, @NonNull String name) {
     return requireNonNull(input, name, Type.FIELD);
   }
 
-  @CheckReturnValue
   public static <T> T requireNonNull(T input, @NonNull String name, @NonNull Type type) {
     switch (type) {
       case FIELD:
@@ -55,20 +52,24 @@ public class Require {
     }
   }
 
-  @CheckReturnValue
-  public static <T extends Number> T requireParamSignedNumber(@NonNull T input, @NonNull String name) {
+  public static <T extends Number> T requireParamSignedNumber(@NonNull T input,
+      @NonNull String name) {
     return requireSignedNumber(input, name, Type.PARAMETER);
   }
 
-  @CheckReturnValue
-  public static <T extends Number> T requireFieldSignedNumber(@NonNull T input, @NonNull String name) {
+  public static <T extends Number> T requireFieldSignedNumber(@NonNull T input,
+      @NonNull String name) {
     return requireSignedNumber(input, name, Type.FIELD);
   }
 
-  @CheckReturnValue
-  public static <T extends Number> T requireSignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
-    input = requireNonNull(input, "input", Type.PARAMETER);
-    name = requireNonNull(name, "name", Type.PARAMETER);
+  public static <T extends Number> T requireSignedNumber(
+      @NonNull T input,
+      @NonNull String name,
+      @NonNull Type type
+  ) {
+    requireNonNull(input, "input", Type.PARAMETER);
+    requireNonNull(name, "name", Type.PARAMETER);
+
     switch (requireNonNull(type, "type", Type.PARAMETER)) {
       case FIELD:
         if (input instanceof Byte && input.byteValue() < 0) {
@@ -106,9 +107,14 @@ public class Require {
   }
 
   @CheckReturnValue
-  public static <T extends Number> T requireUnsignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
-    input = requireNonNull(input, "input", Type.PARAMETER);
-    name = requireNonNull(name, "name", Type.PARAMETER);
+  public static <T extends Number> T requireUnsignedNumber(
+      @NonNull T input,
+      @NonNull String name,
+      @NonNull Type type
+  ) {
+    requireNonNull(input, "input", Type.PARAMETER);
+    requireNonNull(name, "name", Type.PARAMETER);
+
     switch (requireNonNull(type, "type", Type.PARAMETER)) {
       case FIELD:
         if (input instanceof Byte && input.byteValue() >= 0) {
