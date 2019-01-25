@@ -15,6 +15,7 @@
     <build.sourceEncoding>UTF-8</build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <spotbugs.version>3.1.11</spotbugs.version>
   </properties>
 
   <modules>
@@ -25,7 +26,22 @@
     <module>swarm</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs</artifactId>
+      <version>${spotbugs.version}</version>
+    </dependency>
+  </dependencies>
+
   <build>
-    <defaultGoal>clean install</defaultGoal>
+    <defaultGoal>clean install spotbugs:check</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>3.1.10</version>
+      </plugin>
+    </plugins>
   </build>
 </project>
