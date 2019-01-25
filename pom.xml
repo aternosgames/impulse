@@ -18,8 +18,8 @@
   </properties>
 
   <modules>
-    <module>daemon</module>
     <module>client</module>
+    <module>daemon</module>
     <module>swarm</module>
   </modules>
 
