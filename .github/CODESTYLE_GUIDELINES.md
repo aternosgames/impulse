@@ -18,8 +18,8 @@ This can be a constructor, method, static initializer block etc.
 #### Naming
 ##### Package namespaces
 - Avoid using plural package namespaces
-- Every package namespace **is required** to start with `impulse.*`
-- Package **must not** contain a name of fictional characters or/and a person. Doing something like `impulse.dog123.*` (dog123 = username) is prohibited
+- Every package namespace **is required** to start with `com.github.impulsecl.impulse.*`
+- Package **must not** contain a name of fictional characters or/and a person. Doing something like `com.github.impulsecl.impulse.dog123.*` (dog123 = username) is prohibited
 
 #### Line endings
 We are using Unix line endings when committing to the Impulse repository. Windows users of Git can do `git config --global core.autocrlf true`
@@ -53,7 +53,6 @@ We are using 2 spaces for indentations.
 
 <img src="../.docs/assets/yeeh.png" align="left" width="80" height="80"/>
 
-
 ```java
  public class Hello {
    public static void main(String... args) {
@@ -68,7 +67,6 @@ We are using 2 spaces for indentations.
  }
 ```
 
- 
 #### Blank lines
 Place a blank line before the first member of a class, interface, enum, etc. as well as after the last member.
 
