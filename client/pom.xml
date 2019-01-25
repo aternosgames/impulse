@@ -15,4 +15,12 @@
 
   <artifactId>impulse-client</artifactId>
   <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.impulsecl</groupId>
+      <artifactId>impulse-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 </project>
