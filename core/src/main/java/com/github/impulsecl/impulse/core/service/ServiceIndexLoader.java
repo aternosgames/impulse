@@ -34,7 +34,7 @@ final class ServiceIndexLoader {
 
     try {
       if (Files.notExists(Paths.get("services"))) {
-        Path path = Files.createDirectory(Paths.get(""));
+        Path path = Files.createDirectory(Paths.get("services"));
 
         LOGGER.info("Creating the " + path.toFile().getName() + " file...");
 
