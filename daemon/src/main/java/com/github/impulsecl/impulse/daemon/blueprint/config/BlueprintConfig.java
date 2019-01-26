@@ -82,11 +82,11 @@ public class BlueprintConfig {
   @Override
   public String toString() {
     return MoreObjects.toStringHelper(this)
-        .add("version", version)
-        .add("runOnDeployment", runOnDeployment)
-        .add("runAfterKill", runAfterKill)
-        .add("environment", environment)
-        .add("settings", settings)
+        .add("version", this.version)
+        .add("runOnDeployment", this.runOnDeployment)
+        .add("runAfterKill", this.runAfterKill)
+        .add("environment", this.environment)
+        .add("settings", this.settings)
         .toString();
   }
 
@@ -112,7 +112,7 @@ public class BlueprintConfig {
     @Override
     public String toString() {
       return MoreObjects.toStringHelper(this)
-          .add("variables", variables)
+          .add("variables", this.variables)
           .toString();
     }
 
@@ -139,7 +139,7 @@ public class BlueprintConfig {
     @Override
     public String toString() {
       return MoreObjects.toStringHelper(this)
-          .add("preserveFilesOnCrash", preserveFilesOnCrash)
+          .add("preserveFilesOnCrash", this.preserveFilesOnCrash)
           .toString();
     }
 
