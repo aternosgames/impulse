@@ -44,4 +44,5 @@ final class StageMethodRecord implements Comparable<StageMethodRecord> {
   public int compareTo(@NonNull StageMethodRecord other) {
     return priority - other.priority();
   }
+
 }

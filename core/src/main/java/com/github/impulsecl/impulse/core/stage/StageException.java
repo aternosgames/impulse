@@ -15,4 +15,5 @@ public class StageException extends RuntimeException {
   public StageException(@NonNull String message, @NonNull Throwable cause) {
     super(message, cause);
   }
+
 }
