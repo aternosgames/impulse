@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.core.service.annotation;
+package com.github.impulsecl.impulse.core.service;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

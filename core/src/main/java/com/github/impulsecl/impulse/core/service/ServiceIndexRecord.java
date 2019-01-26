@@ -1,8 +1,6 @@
 package com.github.impulsecl.impulse.core.service;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
-import com.github.impulsecl.impulse.core.service.annotation.ServiceMetadata;
-import com.github.impulsecl.impulse.core.service.exception.ServiceIndexException;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.Optional;
 

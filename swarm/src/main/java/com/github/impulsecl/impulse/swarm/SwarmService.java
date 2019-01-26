@@ -1,7 +1,7 @@
 package com.github.impulsecl.impulse.swarm;
 
 import com.github.impulsecl.impulse.core.service.AbstractService;
-import com.github.impulsecl.impulse.core.service.annotation.ServiceMetadata;
+import com.github.impulsecl.impulse.core.service.ServiceMetadata;
 
 @ServiceMetadata(name = "Swarm", serviceCommand = "s", description = "Communicate with the daemons and clients")
 public class SwarmService extends AbstractService {
