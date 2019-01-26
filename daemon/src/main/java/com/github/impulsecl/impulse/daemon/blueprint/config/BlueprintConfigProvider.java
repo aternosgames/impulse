@@ -1,5 +1,6 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -10,8 +11,8 @@ public interface BlueprintConfigProvider {
     return new JsonBlueprintConfigProvider();
   }
 
-  Optional<BlueprintConfig> load(Path path) throws IOException;
+  Optional<BlueprintConfig> load(@NonNull Path path) throws IOException;
 
-  void save(BlueprintConfig config, Path path) throws IOException;
+  void save(@NonNull BlueprintConfig config, @NonNull Path path) throws IOException;
 
 }
