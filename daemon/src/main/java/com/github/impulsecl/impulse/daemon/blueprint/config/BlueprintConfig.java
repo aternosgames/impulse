@@ -18,6 +18,7 @@ public class BlueprintConfig {
   }
 
   private int version;
+  private String name;
   private String runOnDeployment;
   private String runAfterKill;
   private Environment environment;
@@ -25,10 +26,17 @@ public class BlueprintConfig {
 
   protected BlueprintConfig() {
     this.version = BlueprintConfig.VERSION;
+    this.name = "undefined";
     this.runOnDeployment = "undefined";
     this.runAfterKill = "undefined";
     this.environment = new Environment();
     this.settings = new Settings();
+  }
+
+  @NonNull
+  public BlueprintConfig name(@NonNull String name) {
+    this.name = Require.requireParamNonNull(name, "name");
+    return this;
   }
 
   @NonNull
@@ -57,6 +65,11 @@ public class BlueprintConfig {
 
   public int version() {
     return this.version;
+  }
+
+  @NonNull
+  public String name() {
+    return this.name;
   }
 
   @NonNull
