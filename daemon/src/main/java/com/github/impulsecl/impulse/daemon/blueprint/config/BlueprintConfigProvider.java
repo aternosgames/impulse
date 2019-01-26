@@ -6,8 +6,8 @@ import java.util.Optional;
 
 public interface BlueprintConfigProvider {
 
-  Optional<BlueprintConfig> load(Path file) throws IOException;
+  Optional<BlueprintConfig> load(Path path) throws IOException;
 
-  void save(Path file) throws IOException;
+  void save(BlueprintConfig config, Path path) throws IOException;
 
 }
