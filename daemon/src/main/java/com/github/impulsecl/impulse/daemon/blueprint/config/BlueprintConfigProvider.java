@@ -54,6 +54,8 @@ public interface BlueprintConfigProvider {
   @NonNull
   @CheckReturnValue
   static Optional<BlueprintConfigProvider> detect(@NonNull Path path) {
+    Require.requireParamNonNull(path, "path");
+
     String fileExtension = FileUtils.getFileExtension(path.toFile());
 
     Optional<BlueprintConfigProvider> globalProvider;
