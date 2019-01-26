@@ -6,18 +6,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class StandardStageProvider implements StageProvider {
+public class StandardStagePipeline implements StagePipeline {
 
   private static final StageClassLoader STAGE_CLASS_LOADER = StageClassLoader.create();
 
   @NonNull
   @CheckReturnValue
-  public static StageProvider create() {
-    return new StandardStageProvider();
+  public static StagePipeline create() {
+    return new StandardStagePipeline();
   }
 
   @Override
-  public void executeStagesRecursively(@NonNull Class<?> stageClass) {
+  public void processRecursively(@NonNull Class<?> stageClass) {
     List<StageMethodRecord> stageMethods = STAGE_CLASS_LOADER.loadStageClass(stageClass);
 
     for (StageMethodRecord stageMethod : stageMethods) {
