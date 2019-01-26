@@ -11,6 +11,7 @@ public class BlueprintConfig {
 
   private static final transient int VERSION = 1;
 
+  @NonNull
   @CheckReturnValue
   public static BlueprintConfig create() {
     return new BlueprintConfig();
