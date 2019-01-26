@@ -1,5 +1,6 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -7,6 +8,7 @@ import java.util.Optional;
 
 public interface BlueprintConfigProvider {
 
+  @CheckReturnValue
   static BlueprintConfigProvider json() {
     return new JsonBlueprintConfigProvider();
   }
