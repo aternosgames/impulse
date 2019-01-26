@@ -7,11 +7,13 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.Optional;
 
 public class JsonBlueprintConfigProvider implements BlueprintConfigProvider {
 
+  private static final Charset DEFAULT_CHAR_SET = Charset.forName("UTF-8");
   private static final Gson DEFAULT_GSON = new GsonBuilder()
       .disableHtmlEscaping()
       .setPrettyPrinting()
@@ -32,7 +34,7 @@ public class JsonBlueprintConfigProvider implements BlueprintConfigProvider {
   public Optional<BlueprintConfig> load(Path path) throws IOException {
     Require.requireParamNonNull(path, "path");
 
-    try (FileReader configFileReader = new FileReader(path.toFile())) {
+    try (FileReader configFileReader = new FileReader(path.toFile(), DEFAULT_CHAR_SET)) {
       BlueprintConfig blueprintConfig = this.gson.fromJson(configFileReader, BlueprintConfig.class);
       return Optional.of(blueprintConfig);
     }
@@ -43,7 +45,7 @@ public class JsonBlueprintConfigProvider implements BlueprintConfigProvider {
     Require.requireParamNonNull(config, "config");
     Require.requireParamNonNull(path, "path");
 
-    try (FileWriter configFileWriter = new FileWriter(path.toFile())) {
+    try (FileWriter configFileWriter = new FileWriter(path.toFile(), DEFAULT_CHAR_SET)) {
       this.gson.toJson(config, configFileWriter);
     }
   }
