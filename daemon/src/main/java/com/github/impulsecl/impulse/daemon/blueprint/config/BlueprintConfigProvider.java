@@ -15,6 +15,10 @@ import org.apache.logging.log4j.core.util.FileUtils;
 
 public interface BlueprintConfigProvider {
 
+  Optional<BlueprintConfig> load(@NonNull Path path) throws IOException;
+
+  void save(@NonNull BlueprintConfig config, @NonNull Path path) throws IOException;
+
   @NonNull
   @CheckReturnValue
   static BlueprintConfigProvider standard() {
@@ -70,9 +74,5 @@ public interface BlueprintConfigProvider {
 
     return internalProvider;
   }
-
-  Optional<BlueprintConfig> load(@NonNull Path path) throws IOException;
-
-  void save(@NonNull BlueprintConfig config, @NonNull Path path) throws IOException;
 
 }
