@@ -24,6 +24,7 @@
     <!-- GOOGLE -->
     <guava.version>27.0.1-jre</guava.version>
     <jackson.version>2.9.8</jackson.version>
+    <junit.verion>4.12</junit.verion>
   </properties>
 
   <dependencies>
@@ -70,5 +71,12 @@
       <artifactId>jackson-dataformat-yaml</artifactId>
       <version>${jackson.version}</version>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.verion}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 </project>
