@@ -16,21 +16,11 @@
   <artifactId>impulse-daemon</artifactId>
   <packaging>jar</packaging>
 
-  <properties>
-    <commons-io.version>2.6</commons-io.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>com.github.impulsecl</groupId>
       <artifactId>impulse-core</artifactId>
       <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <!-- APACHE -->
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>${commons-io.version}</version>
     </dependency>
   </dependencies>
 </project>
