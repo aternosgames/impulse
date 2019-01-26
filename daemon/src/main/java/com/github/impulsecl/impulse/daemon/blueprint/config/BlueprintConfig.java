@@ -4,8 +4,14 @@ import com.github.impulsecl.impulse.common.semantic.Require;
 import com.google.common.base.MoreObjects;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import java.io.IOException;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import org.apache.commons.io.FilenameUtils;
 
 public class BlueprintConfig {
 
@@ -15,6 +21,21 @@ public class BlueprintConfig {
   @CheckReturnValue
   public static BlueprintConfig create() {
     return new BlueprintConfig();
+  }
+
+  @NonNull
+  @CheckReturnValue
+  public static Optional<Path> findInDirectory(@NonNull Path directory, FileVisitOption... visitOptions) {
+    Require.requireParamNonNull(directory, "directory");
+
+    try {
+      return Files.walk(directory, visitOptions)
+          .filter(path -> !Files.isDirectory(path))
+          .filter(path -> FilenameUtils.getBaseName(path.toFile().getName()).equalsIgnoreCase("blueprint"))
+          .findAny();
+    } catch (IOException cause) {
+      throw new IllegalStateException("Could not search for blueprint file: ", cause);
+    }
   }
 
   private int version;
