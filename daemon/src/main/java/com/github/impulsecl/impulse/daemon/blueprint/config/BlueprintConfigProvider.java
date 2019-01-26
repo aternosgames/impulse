@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface BlueprintConfigProvider {
 
+  @NonNull
   @CheckReturnValue
   static BlueprintConfigProvider json() {
     return new JsonBlueprintConfigProvider();
