@@ -22,6 +22,7 @@
     <commons-cli.version>1.4</commons-cli.version>
     <!-- GOOGLE -->
     <guava.version>27.0.1-jre</guava.version>
+    <jackson.version>2.9.8</jackson.version>
   </properties>
 
   <dependencies>
@@ -46,6 +47,22 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
+    </dependency>
+    <!-- JACKSON -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
   </dependencies>
 </project>
