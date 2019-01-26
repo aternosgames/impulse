@@ -46,12 +46,14 @@ final class StageMethodRecord implements Comparable<StageMethodRecord> {
 
   @Override
   public boolean equals(@Nullable Object other) {
-    if (this == other) {
-      return true;
-    }
     if (other == null || getClass() != other.getClass()) {
       return false;
     }
+
+    if (this == other) {
+      return true;
+    }
+
     StageMethodRecord that = (StageMethodRecord) other;
     return priority == that.priority &&
         Objects.equals(method, that.method);
