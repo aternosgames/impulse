@@ -3,6 +3,7 @@ package com.github.impulsecl.impulse.core.stage;
 import com.github.impulsecl.impulse.common.semantic.Require;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
@@ -44,11 +45,11 @@ final class StageMethodRecord implements Comparable<StageMethodRecord> {
   }
 
   @Override
-  public boolean equals(@NonNull Object other) {
+  public boolean equals(@Nullable Object other) {
     if (this == other) {
       return true;
     }
-    if (getClass() != other.getClass()) {
+    if (other == null || getClass() != other.getClass()) {
       return false;
     }
     StageMethodRecord that = (StageMethodRecord) other;
