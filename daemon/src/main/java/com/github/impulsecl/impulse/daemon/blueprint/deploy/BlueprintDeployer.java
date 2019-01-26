@@ -4,10 +4,10 @@ import com.github.impulsecl.impulse.daemon.blueprint.config.BlueprintConfig;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.nio.file.Path;
 
-public interface BlueprintDeploy {
+public interface BlueprintDeployer {
 
   void deploy(
       @NonNull BlueprintConfig blueprintConfig,
       @NonNull Path targetBlueprintDirectory,
-      @NonNull int amountOfBlueprints);
+      int amountOfBlueprints);
 }

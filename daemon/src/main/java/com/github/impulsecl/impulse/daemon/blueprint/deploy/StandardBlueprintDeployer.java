@@ -12,22 +12,21 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class StandardBlueprintDeploy implements BlueprintDeploy {
+public class StandardBlueprintDeployer implements BlueprintDeployer {
 
-  private static final Logger LOGGER = LogManager.getLogger(StandardBlueprintDeploy.class);
+  private static final Logger LOGGER = LogManager.getLogger(StandardBlueprintDeployer.class);
 
   @NonNull
-  static BlueprintDeploy create() {
-    return new StandardBlueprintDeploy();
+  static BlueprintDeployer create() {
+    return new StandardBlueprintDeployer();
   }
 
   public void deploy(
       @NonNull BlueprintConfig blueprintConfig,
       @NonNull Path targetBlueprintDirectory,
-      @NonNull int amountOfBlueprints) {
+      int amountOfBlueprints) {
     Require.requireParamNonNull(blueprintConfig, "blueprintConfig");
     Require.requireParamNonNull(targetBlueprintDirectory, "targetBlueprintDirectory");
-    Require.requireParamNonNull(amountOfBlueprints, "amountOfBlueprints");
 
     Path blueprintSource = Paths.get("blueprints/" + blueprintConfig.name());
 
@@ -37,7 +36,7 @@ public class StandardBlueprintDeploy implements BlueprintDeploy {
 
         LOGGER.info("Creating the " + path.toFile().getName() + " directory...");
       } catch (IOException cause) {
-        throw new BlueprintDeployException(
+        throw new BlueprintDeployerException(
             "Blueprint directory could not be created due to insufficient file permissions ");
       }
     }
@@ -52,14 +51,14 @@ public class StandardBlueprintDeploy implements BlueprintDeploy {
           Path path = Files.createDirectory(blueprintTarget);
           LOGGER.info("Creating the " + path.toFile().getName() + " directory...");
         } catch (IOException cause) {
-          throw new BlueprintDeployException(
+          throw new BlueprintDeployerException(
               "Blueprint" + blueprintConfig.name() + " could not be deployed due to insufficient file permissions");
         }
 
         try {
           FileUtils.copyDirectory(blueprintSource.toFile(), blueprintTarget.toFile());
         } catch (IOException cause) {
-          throw new BlueprintDeployException(
+          throw new BlueprintDeployerException(
               "Blueprint" + blueprintConfig.name() + " could not be deployed due to insufficient file permissions");
         }
       }
