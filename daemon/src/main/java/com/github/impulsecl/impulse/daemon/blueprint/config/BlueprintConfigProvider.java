@@ -11,6 +11,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import org.apache.logging.log4j.core.util.FileUtils;
 
 public interface BlueprintConfigProvider {
 
@@ -48,6 +49,24 @@ public interface BlueprintConfigProvider {
   @CheckReturnValue
   static BlueprintConfigProvider jackson(@NonNull ObjectMapper objectMapper) {
     return new JacksonBlueprintConfigProvider(objectMapper);
+  }
+
+  @NonNull
+  @CheckReturnValue
+  static Optional<BlueprintConfigProvider> detect(@NonNull Path path) {
+    String fileExtension = FileUtils.getFileExtension(path.toFile());
+
+    Optional<BlueprintConfigProvider> globalProvider;
+    Optional<BlueprintConfigProvider> internalProvider;
+
+    globalProvider = BlueprintConfigProviderRegistry.global().getProvider(fileExtension);
+    internalProvider = BlueprintConfigProviderRegistry.internal().getProvider(fileExtension);
+
+    if (globalProvider.isPresent()) {
+      return globalProvider;
+    }
+
+    return internalProvider;
   }
 
   Optional<BlueprintConfig> load(@NonNull Path path) throws IOException;
