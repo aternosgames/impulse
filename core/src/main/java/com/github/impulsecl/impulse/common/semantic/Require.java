@@ -60,10 +60,11 @@ public class Require {
   }
 
   public static <T extends Number> T requireSignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
-    requireNonNull(input, "input", Type.PARAMETER);
-    requireNonNull(name, "name", Type.PARAMETER);
+    Require.requireNonNull(input, "input", Type.PARAMETER);
+    Require.requireNonNull(name, "name", Type.PARAMETER);
+    Require.requireNonNull(type, "type", Type.PARAMETER);
 
-    switch (requireNonNull(type, "type", Type.PARAMETER)) {
+    switch (type) {
       case FIELD:
         if (input instanceof Byte && input.byteValue() < 0) {
           throw new IllegalArgumentException(signedByteField(name, input.byteValue()));
@@ -100,10 +101,11 @@ public class Require {
   }
 
   public static <T extends Number> T requireUnsignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
-    requireNonNull(input, "input", Type.PARAMETER);
-    requireNonNull(name, "name", Type.PARAMETER);
+    Require.requireNonNull(input, "input", Type.PARAMETER);
+    Require.requireNonNull(name, "name", Type.PARAMETER);
+    Require.requireNonNull(type, "type", Type.PARAMETER);
 
-    switch (requireNonNull(type, "type", Type.PARAMETER)) {
+    switch (type) {
       case FIELD:
         if (input instanceof Byte && input.byteValue() >= 0) {
           throw new IllegalArgumentException(unsignedByteField(name, input.byteValue()));

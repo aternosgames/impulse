@@ -1,6 +1,8 @@
 package com.github.impulsecl.impulse.core.service;
 
 import com.github.impulsecl.impulse.core.service.annotation.ServiceMetadata;
+import com.github.impulsecl.impulse.core.service.exception.ServiceIndexException;
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,12 +27,14 @@ final class ServiceIndexLoader {
   private static final Logger LOGGER = LogManager.getLogger(ServiceIndexLoader.class);
 
   @NonNull
-  static ServiceIndexLoader create() {
+  @CheckReturnValue
+  protected static ServiceIndexLoader create() {
     return new ServiceIndexLoader();
   }
 
   @NonNull
-  Collection<ServiceIndexRecord> loadServices() {
+  @CheckReturnValue
+  protected Collection<ServiceIndexRecord> loadServices() {
     List<ServiceIndexRecord> loadedRecords = new ArrayList<>();
 
     try {
@@ -69,7 +73,7 @@ final class ServiceIndexLoader {
                 try {
                   clazz = urlClassLoader.loadClass(targetClassName);
                 } catch (ClassNotFoundException cause) {
-                  throw new RuntimeException(cause);
+                  throw new ServiceIndexException(cause);
                 }
 
                 if (clazz.isAnnotationPresent(ServiceMetadata.class)) {
@@ -81,12 +85,12 @@ final class ServiceIndexLoader {
               return null;
             });
           } catch (IOException cause) {
-            cause.printStackTrace();
+            throw new ServiceIndexException(cause);
           }
         });
 
     } catch (IOException cause) {
-      cause.printStackTrace();
+      throw new ServiceIndexException(cause);
     }
 
     return loadedRecords;
