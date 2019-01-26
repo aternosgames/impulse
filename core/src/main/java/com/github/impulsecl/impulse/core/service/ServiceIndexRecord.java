@@ -33,22 +33,22 @@ public final class ServiceIndexRecord {
   }
 
   @NonNull
-  public String getName() {
+  public String name() {
     return this.name;
   }
 
   @NonNull
-  public String getServiceCommand() {
+  public String serviceCommand() {
     return this.serviceCommand;
   }
 
   @NonNull
-  public String getDescription() {
+  public String description() {
     return this.description;
   }
 
   @NonNull
-  public Class<?> getServiceClass() {
+  public Class<?> serviceClass() {
     return this.serviceClass;
   }
 

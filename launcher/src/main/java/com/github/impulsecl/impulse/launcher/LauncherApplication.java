@@ -24,7 +24,7 @@ public class LauncherApplication {
     serviceIndex.registerRecordRecursive();
 
     for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
-      options.addOption(serviceIndexRecord.getServiceCommand(), false, serviceIndexRecord.getDescription());
+      options.addOption(serviceIndexRecord.serviceCommand(), false, serviceIndexRecord.description());
     }
 
     try {
@@ -32,9 +32,9 @@ public class LauncherApplication {
       CommandLine commandLine = commandLineParser.parse(options, arguments);
 
       for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
-        if (commandLine.hasOption(serviceIndexRecord.getServiceCommand())) {
+        if (commandLine.hasOption(serviceIndexRecord.serviceCommand())) {
 
-          Optional<Service> optionalService = serviceInvoker.invokeService(serviceIndexRecord.getServiceClass());
+          Optional<Service> optionalService = serviceInvoker.invokeService(serviceIndexRecord.serviceClass());
 
           if (optionalService.isPresent()) {
             Service service = optionalService.get();
