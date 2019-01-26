@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.common.command;
+package com.github.impulsecl.impulse.core.command;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 
