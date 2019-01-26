@@ -1,6 +1,7 @@
 package com.github.impulsecl.impulse.core.service;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,6 +14,7 @@ public class ServiceIndex {
   private static final Set<ServiceIndexRecord> RECORDS = new HashSet<>();
 
   @NonNull
+  @CheckReturnValue
   public static ServiceIndex create() {
     return new ServiceIndex();
   }
@@ -32,6 +34,7 @@ public class ServiceIndex {
   }
 
   @NonNull
+  @CheckReturnValue
   public Collection<ServiceIndexRecord> getRecords() {
     return Collections.unmodifiableCollection(RECORDS);
   }

@@ -1,12 +1,14 @@
 package com.github.impulsecl.impulse.core.stage;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.lang.reflect.Method;
 
 final class StageMethodRecord implements Comparable<StageMethodRecord> {
 
   @NonNull
+  @CheckReturnValue
   static StageMethodRecord create() {
     return new StageMethodRecord();
   }

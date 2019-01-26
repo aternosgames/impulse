@@ -1,5 +1,6 @@
 package com.github.impulsecl.impulse.core.stage;
 
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,6 +11,7 @@ public class StandardStageProvider implements StageProvider {
   private static final StageClassLoader STAGE_CLASS_LOADER = StageClassLoader.create();
 
   @NonNull
+  @CheckReturnValue
   public static StageProvider create() {
     return new StandardStageProvider();
   }
