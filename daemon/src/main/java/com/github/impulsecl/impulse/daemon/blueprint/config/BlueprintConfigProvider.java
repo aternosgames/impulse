@@ -76,17 +76,13 @@ public interface BlueprintConfigProvider {
 
     String fileExtension = FilenameUtils.getExtension(path.toFile().getName());
 
-    Optional<BlueprintConfigProvider> globalProvider;
-    Optional<BlueprintConfigProvider> internalProvider;
+    Optional<BlueprintConfigProvider> globalProvider
+        = BlueprintConfigProviderRegistry.global().getProvider(fileExtension);
 
-    globalProvider = BlueprintConfigProviderRegistry.global().getProvider(fileExtension);
-    internalProvider = BlueprintConfigProviderRegistry.internal().getProvider(fileExtension);
+    Optional<BlueprintConfigProvider> internalProvider
+        = BlueprintConfigProviderRegistry.internal().getProvider(fileExtension);
 
-    if (globalProvider.isPresent()) {
-      return globalProvider;
-    }
-
-    return internalProvider;
+    return globalProvider.isPresent() ? globalProvider : internalProvider;
   }
 
 }
