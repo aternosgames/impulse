@@ -1,8 +1,10 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.impulsecl.impulse.common.semantic.Require;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.FileReader;
@@ -12,25 +14,26 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.Optional;
 
-public class JsonBlueprintConfigProvider implements BlueprintConfigProvider {
+public class JacksonBlueprintConfigProvider implements BlueprintConfigProvider {
 
   private static final Charset DEFAULT_CHAR_SET = Charset.forName("UTF-8");
-  private static final Gson DEFAULT_GSON = new GsonBuilder()
-      .disableHtmlEscaping()
-      .setPrettyPrinting()
-      .serializeNulls()
-      .create();
+  private static final ObjectMapper DEFAULT_OBJECT_MAPPER = new ObjectMapper();
 
-  private Gson gson;
+  static {
+    DEFAULT_OBJECT_MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
+    DEFAULT_OBJECT_MAPPER.setVisibility(PropertyAccessor.ALL, Visibility.ANY);
+  }
+
+  private ObjectMapper objectMapper;
 
   @CheckReturnValue
-  public JsonBlueprintConfigProvider() {
-    this(JsonBlueprintConfigProvider.DEFAULT_GSON);
+  public JacksonBlueprintConfigProvider() {
+    this(JacksonBlueprintConfigProvider.DEFAULT_OBJECT_MAPPER);
   }
 
   @CheckReturnValue
-  public JsonBlueprintConfigProvider(@NonNull Gson gson) {
-    this.gson = Require.requireParamNonNull(gson, "gson");
+  public JacksonBlueprintConfigProvider(@NonNull ObjectMapper objectMapper) {
+    this.objectMapper = Require.requireParamNonNull(objectMapper, "objectMapper");
   }
 
   @NonNull
@@ -40,7 +43,7 @@ public class JsonBlueprintConfigProvider implements BlueprintConfigProvider {
     Require.requireParamNonNull(path, "path");
 
     try (FileReader configFileReader = new FileReader(path.toFile(), DEFAULT_CHAR_SET)) {
-      BlueprintConfig blueprintConfig = this.gson.fromJson(configFileReader, BlueprintConfig.class);
+      BlueprintConfig blueprintConfig = this.objectMapper.readValue(configFileReader, BlueprintConfig.class);
       return Optional.of(blueprintConfig);
     }
   }
@@ -51,7 +54,7 @@ public class JsonBlueprintConfigProvider implements BlueprintConfigProvider {
     Require.requireParamNonNull(path, "path");
 
     try (FileWriter configFileWriter = new FileWriter(path.toFile(), DEFAULT_CHAR_SET)) {
-      this.gson.toJson(config, configFileWriter);
+      this.objectMapper.writeValue(configFileWriter, config);
     }
   }
 
