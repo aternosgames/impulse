@@ -4,6 +4,7 @@ import com.github.impulsecl.impulse.common.semantic.Require;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 final class StageMethodRecord implements Comparable<StageMethodRecord> {
 
@@ -43,8 +44,30 @@ final class StageMethodRecord implements Comparable<StageMethodRecord> {
   }
 
   @Override
+  public boolean equals(@NonNull Object other) {
+    if (this == other) {
+      return true;
+    }
+    if (getClass() != other.getClass()) {
+      return false;
+    }
+    StageMethodRecord that = (StageMethodRecord) other;
+    return priority == that.priority &&
+        Objects.equals(method, that.method);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(priority, method);
+  }
+
+  @Override
   public int compareTo(@NonNull StageMethodRecord other) {
-    return priority - other.priority();
+    if (this.equals(other)) {
+      return 0;
+    }
+
+    return this.priority - other.priority();
   }
 
 }
