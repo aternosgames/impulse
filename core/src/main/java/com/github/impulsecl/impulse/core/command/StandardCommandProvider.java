@@ -29,7 +29,7 @@ public class StandardCommandProvider implements CommandProvider {
     String[] splittedCommandLine = commandLine.split(" ");
 
     if (COMMANDS.containsKey(splittedCommandLine[0])) {
-      String[] arguments = buildCommandLine(splittedCommandLine).split(" ");
+      String[] arguments = this.buildCommandLine(splittedCommandLine).split(" ");
 
       Command command = COMMANDS.get(splittedCommandLine[0]);
       command.execute(arguments);
