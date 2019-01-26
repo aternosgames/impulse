@@ -1,6 +1,7 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import com.google.common.base.MoreObjects;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.HashMap;
@@ -77,7 +78,18 @@ public class BlueprintConfig {
     return this.settings;
   }
 
-  public class Environment {
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(this)
+        .add("version", version)
+        .add("runOnDeployment", runOnDeployment)
+        .add("runAfterKill", runAfterKill)
+        .add("environment", environment)
+        .add("settings", settings)
+        .toString();
+  }
+
+  public static class Environment {
 
     private Map<String, Object> variables;
 
@@ -96,14 +108,16 @@ public class BlueprintConfig {
       return this.variables;
     }
 
-    @NonNull
-    public BlueprintConfig back() {
-      return BlueprintConfig.this;
+    @Override
+    public String toString() {
+      return MoreObjects.toStringHelper(this)
+          .add("variables", variables)
+          .toString();
     }
 
   }
 
-  public class Settings {
+  public static class Settings {
 
     private boolean preserveFilesOnCrash;
 
@@ -121,9 +135,11 @@ public class BlueprintConfig {
       return this.preserveFilesOnCrash;
     }
 
-    @NonNull
-    public BlueprintConfig back() {
-      return BlueprintConfig.this;
+    @Override
+    public String toString() {
+      return MoreObjects.toStringHelper(this)
+          .add("preserveFilesOnCrash", preserveFilesOnCrash)
+          .toString();
     }
 
   }
