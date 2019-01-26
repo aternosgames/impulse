@@ -11,7 +11,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import org.apache.logging.log4j.core.util.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 public interface BlueprintConfigProvider {
 
@@ -57,10 +57,24 @@ public interface BlueprintConfigProvider {
 
   @NonNull
   @CheckReturnValue
-  static Optional<BlueprintConfigProvider> detect(@NonNull Path path) {
+  static Optional<BlueprintConfigProvider> detectFromDirectory(@NonNull Path directory) {
+    Require.requireParamNonNull(directory, "directory");
+
+    Optional<Path> foundBlueprintConfig = BlueprintConfig.findInDirectory(directory);
+
+    if (foundBlueprintConfig.isEmpty()) {
+      return Optional.empty();
+    }
+
+    return BlueprintConfigProvider.detectFromFile(foundBlueprintConfig.get());
+  }
+
+  @NonNull
+  @CheckReturnValue
+  static Optional<BlueprintConfigProvider> detectFromFile(@NonNull Path path) {
     Require.requireParamNonNull(path, "path");
 
-    String fileExtension = FileUtils.getFileExtension(path.toFile());
+    String fileExtension = FilenameUtils.getExtension(path.toFile().getName());
 
     Optional<BlueprintConfigProvider> globalProvider;
     Optional<BlueprintConfigProvider> internalProvider;
