@@ -6,4 +6,12 @@ public class ServiceIndexException extends RuntimeException {
     super(message);
   }
 
+  public ServiceIndexException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  public ServiceIndexException(Throwable cause) {
+    super(cause);
+  }
+
 }
