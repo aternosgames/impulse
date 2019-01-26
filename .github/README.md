@@ -17,6 +17,10 @@ A hybrid Minecraft server orchestration software
   <img alt="Build Status"
        src="https://travis-ci.org/impulsecl/impulse.svg?branch=master">
   </a>
+  
+  <a href="https://www.codacy.com/app/ShadowAriaa/impulse?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=impulsecl/impulse&amp;utm_campaign=Badge_Grade">
+  <img src="https://api.codacy.com/project/badge/Grade/2dc0de0afed14b9f8e1aad5dcbc6d7b6"/>
+  </a>
 
 </p>
 
