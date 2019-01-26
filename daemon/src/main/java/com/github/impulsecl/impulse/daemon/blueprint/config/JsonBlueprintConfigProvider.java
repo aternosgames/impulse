@@ -33,6 +33,7 @@ public class JsonBlueprintConfigProvider implements BlueprintConfigProvider {
     this.gson = Require.requireParamNonNull(gson, "gson");
   }
 
+  @NonNull
   @Override
   @CheckReturnValue
   public Optional<BlueprintConfig> load(@NonNull Path path) throws IOException {
