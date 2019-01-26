@@ -23,7 +23,7 @@ public class BlueprintConfig {
   private Environment environment;
   private Settings settings;
 
-  private BlueprintConfig() {
+  protected BlueprintConfig() {
     this.version = BlueprintConfig.VERSION;
     this.runOnDeployment = "undefined";
     this.runAfterKill = "undefined";
