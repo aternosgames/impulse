@@ -17,13 +17,12 @@ public class LauncherApplication {
   public static void main(String[] arguments) {
     System.out.println(Messages.getImpulseAsciiLogo());
 
-    ServiceIndex serviceIndex = ServiceIndex.create();
     ServiceInvoker serviceInvoker = ServiceInvoker.create();
     Options options = new Options();
 
-    serviceIndex.registerRecordRecursive();
+    ServiceIndex.registerRecordRecursive();
 
-    for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
+    for (ServiceIndexRecord serviceIndexRecord : ServiceIndex.getRecords()) {
       options.addOption(serviceIndexRecord.serviceCommand(), false, serviceIndexRecord.description());
     }
 
@@ -31,13 +30,14 @@ public class LauncherApplication {
       CommandLineParser commandLineParser = new DefaultParser();
       CommandLine commandLine = commandLineParser.parse(options, arguments);
 
-      for (ServiceIndexRecord serviceIndexRecord : serviceIndex.getRecords()) {
+      for (ServiceIndexRecord serviceIndexRecord : ServiceIndex.getRecords()) {
         if (commandLine.hasOption(serviceIndexRecord.serviceCommand())) {
 
           Optional<Service> optionalService = serviceInvoker.invokeService(serviceIndexRecord.serviceClass());
 
           if (optionalService.isPresent()) {
             Service service = optionalService.get();
+            ServiceIndex.registerService(service);
             service.start();
 
             Runtime.getRuntime().addShutdownHook(new Thread(service::stop));

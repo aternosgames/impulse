@@ -43,11 +43,6 @@ public final class ServiceIndexRecord {
   }
 
   @NonNull
-  public String description() {
-    return this.description;
-  }
-
-  @NonNull
   public Class<?> serviceClass() {
     return this.serviceClass;
   }
