@@ -30,26 +30,26 @@ public class StandardCommandProvider implements CommandProvider {
   public void executeCommand(@NonNull String commandLine) {
     Require.requireParamNonNull(commandLine, "commandLine");
 
-    String[] splittedCommandLine = commandLine.split(" ");
+    String[] arguments = commandLine.split(" ");
 
-    if (COMMANDS.containsKey(splittedCommandLine[0])) {
-      String[] arguments = this.buildCommandLine(splittedCommandLine).split(" ");
+    if (COMMANDS.containsKey(arguments[0])) {
+      String[] splitArguments = this.buildCommandLine(arguments).split(" ");
 
-      Command command = COMMANDS.get(splittedCommandLine[0]);
-      command.execute(arguments);
+      Command command = COMMANDS.get(arguments[0]);
+      command.execute(splitArguments);
     }
   }
 
   @NonNull
   @CheckReturnValue
-  private String buildCommandLine(@NonNull String[] splittedCommandLine) {
-    Require.requireParamNonNull(splittedCommandLine, "splittedCommandLine");
+  private String buildCommandLine(@NonNull String[] arguments) {
+    Require.requireParamNonNull(arguments, "arguments");
     StringBuilder stringBuilder = new StringBuilder();
 
-    for (String singleArgument : splittedCommandLine) {
-      if (!singleArgument.equals(splittedCommandLine[0])) {
-        stringBuilder.append(singleArgument)
-            .append(" ");
+    for (String argument : arguments) {
+      if (!argument.equals(arguments[0])) {
+        stringBuilder.append(argument);
+        stringBuilder.append(" ");
       }
     }
 
