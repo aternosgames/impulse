@@ -34,12 +34,13 @@ public class LauncherApplication {
 
       for (ServiceIndexRecord serviceIndexRecord : ServiceIndex.getRecords()) {
         if (commandLine.hasOption(serviceIndexRecord.serviceCommand())) {
-
           Optional<Service> optionalService = serviceInvoker.invokeService(serviceIndexRecord.serviceClass());
 
           if (optionalService.isPresent()) {
             Service service = optionalService.get();
+
             ServiceIndex.registerService(service);
+
             service.start();
 
             Runtime.getRuntime().addShutdownHook(new Thread(service::stop));

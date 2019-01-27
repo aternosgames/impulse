@@ -16,8 +16,9 @@ public class StopCommand implements Command {
   public void execute(@NonNull String[] arguments) {
     LOGGER.info("Stopping the impulse software...");
 
-    Service service = ServiceIndex.getService();
-    service.stop();
+    for (Service service : ServiceIndex.getServices()) {
+      service.stop();
+    }
   }
 
 }
