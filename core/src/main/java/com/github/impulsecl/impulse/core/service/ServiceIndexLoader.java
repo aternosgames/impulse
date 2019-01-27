@@ -54,7 +54,7 @@ final class ServiceIndexLoader {
             try {
               urlClassLoader = new URLClassLoader(new URL[]{servicePath.toFile().toURI().toURL()});
             } catch (MalformedURLException cause) {
-              throw new RuntimeException(cause);
+              throw new ServiceIndexException(cause);
             }
 
             while (jarEntryEnumeration.hasMoreElements()) {
