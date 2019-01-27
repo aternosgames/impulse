@@ -35,6 +35,7 @@ public class ConfigProviderRegistry {
   protected static ConfigProviderRegistry internal() {
     return ConfigProviderRegistry.INTERNAL;
   }
+
   private Map<String, ConfigProvider> registeredProviders;
 
   @CheckReturnValue

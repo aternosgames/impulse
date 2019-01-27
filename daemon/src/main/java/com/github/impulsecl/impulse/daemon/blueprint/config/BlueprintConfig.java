@@ -71,6 +71,7 @@ public class BlueprintConfig {
     }
 
   }
+
   private static final transient int VERSION = 1;
 
   @NonNull
@@ -93,6 +94,7 @@ public class BlueprintConfig {
       throw new IllegalStateException("Could not search for blueprint file: ", cause);
     }
   }
+
   private int version;
   private String name;
   private String runOnDeployment;

@@ -34,6 +34,7 @@ public class BlueprintConfigProviderRegistry {
   protected static BlueprintConfigProviderRegistry internal() {
     return BlueprintConfigProviderRegistry.INTERNAL;
   }
+
   private Map<String, BlueprintConfigProvider> registeredProviders;
 
   @CheckReturnValue
