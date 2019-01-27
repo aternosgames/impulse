@@ -8,14 +8,14 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StandardCommandProvider implements CommandProvider {
+public class StandardCommandRegistry implements CommandRegistry {
 
   private static final Map<String, Command> COMMANDS = new HashMap<>();
 
   @NonNull
   @CheckReturnValue
-  public static CommandProvider create() {
-    return new StandardCommandProvider();
+  public static CommandRegistry create() {
+    return new StandardCommandRegistry();
   }
 
   @Override

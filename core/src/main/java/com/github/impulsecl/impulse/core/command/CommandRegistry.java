@@ -2,7 +2,7 @@ package com.github.impulsecl.impulse.core.command;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 
-public interface CommandProvider {
+public interface CommandRegistry {
 
   void registerCommand(@NonNull String firstCommandArgument, @NonNull Command command);
 
