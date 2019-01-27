@@ -12,7 +12,7 @@ public class ServiceIndexException extends RuntimeException {
     super(message, cause);
   }
 
-  public ServiceIndexException(Throwable cause) {
+  public ServiceIndexException(@NonNull Throwable cause) {
     super(cause);
   }
 
