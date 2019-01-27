@@ -8,6 +8,6 @@ public class StageTest {
   public void runStageTest() {
     StagePipeline stagePipeline = StandardStagePipeline.create();
 
-    stagePipeline.processRecursively(DaemonTestStage.class);
+    stagePipeline.processRecursively(TestStagePipeline.class);
   }
 }
