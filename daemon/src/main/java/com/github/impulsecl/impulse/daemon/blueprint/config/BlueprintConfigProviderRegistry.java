@@ -1,8 +1,10 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -23,16 +25,15 @@ public class BlueprintConfigProviderRegistry {
 
   @NonNull
   @CheckReturnValue
-  protected static BlueprintConfigProviderRegistry internal() {
-    return BlueprintConfigProviderRegistry.INTERNAL;
-  }
-
-  @NonNull
-  @CheckReturnValue
   public static BlueprintConfigProviderRegistry global() {
     return BlueprintConfigProviderRegistry.GLOBAL;
   }
 
+  @NonNull
+  @CheckReturnValue
+  protected static BlueprintConfigProviderRegistry internal() {
+    return BlueprintConfigProviderRegistry.INTERNAL;
+  }
   private Map<String, BlueprintConfigProvider> registeredProviders;
 
   @CheckReturnValue
@@ -65,19 +66,19 @@ public class BlueprintConfigProviderRegistry {
     return this;
   }
 
+  @CheckReturnValue
+  public boolean hasProvider(@NonNull String fileExtension) {
+    Require.requireParamNonNull(fileExtension, "fileExtension");
+
+    return this.getProvider(fileExtension).isPresent();
+  }
+
   @NonNull
   @CheckReturnValue
   public Optional<BlueprintConfigProvider> getProvider(@NonNull String fileExtension) {
     Require.requireParamNonNull(fileExtension, "fileExtension");
 
     return Optional.ofNullable(this.registeredProviders.get(fileExtension));
-  }
-
-  @CheckReturnValue
-  public boolean hasProvider(@NonNull String fileExtension) {
-    Require.requireParamNonNull(fileExtension, "fileExtension");
-
-    return this.getProvider(fileExtension).isPresent();
   }
 
   @NonNull

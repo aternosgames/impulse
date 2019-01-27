@@ -1,8 +1,10 @@
 package com.github.impulsecl.impulse.core.command;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 

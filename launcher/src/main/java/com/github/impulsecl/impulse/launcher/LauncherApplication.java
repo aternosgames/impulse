@@ -5,12 +5,14 @@ import com.github.impulsecl.impulse.core.service.Service;
 import com.github.impulsecl.impulse.core.service.ServiceIndex;
 import com.github.impulsecl.impulse.core.service.ServiceIndexRecord;
 import com.github.impulsecl.impulse.core.service.ServiceInvoker;
-import java.util.Optional;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
+import java.util.Optional;
 
 public class LauncherApplication {
 

@@ -10,4 +10,5 @@ public class StageTest {
 
     stagePipeline.processRecursively(TestStagePipeline.class);
   }
+
 }

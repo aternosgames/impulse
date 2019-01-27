@@ -2,6 +2,7 @@ package com.github.impulsecl.impulse.common.semantic;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.util.Objects;
 
 public class Messages {
@@ -40,6 +41,10 @@ public class Messages {
   @CheckReturnValue
   public static String parameterNull(@NonNull String name) {
     return String.format(PARAMETER_NULL, nonNull(name));
+  }
+
+  private static <T> T nonNull(T input) {
+    return Objects.requireNonNull(input, "Input cannot be null");
   }
 
   @CheckReturnValue
@@ -166,10 +171,6 @@ public class Messages {
   @CheckReturnValue
   public static String unsignedDoubleField(@NonNull String name, double value) {
     return String.format(FIELD_UNSIGNED_NUMBER, nonNull(name), "double", String.valueOf(value));
-  }
-
-  private static <T> T nonNull(T input) {
-    return Objects.requireNonNull(input, "Input cannot be null");
   }
 
 }

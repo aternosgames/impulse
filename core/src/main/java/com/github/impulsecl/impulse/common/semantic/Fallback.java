@@ -11,6 +11,12 @@ public class Fallback {
     return fallbackIf(input != null, input, defaultValue);
   }
 
+  @Nullable
+  @CheckReturnValue
+  public static <T> T fallbackIf(boolean expression, @Nullable T trueFlag, @Nullable T falseFlag) {
+    return expression ? trueFlag : falseFlag;
+  }
+
   @CheckReturnValue
   public static <T> T[] fallbackIfNull(T[] input, @NonNull T[] defaultValue) {
     return fallbackIf(input != null, input, defaultValue);
@@ -24,12 +30,6 @@ public class Fallback {
   @CheckReturnValue
   public static <T extends Number> T fallbackIfUnsigned(@NonNull T input, @NonNull T defaultValue) {
     return fallbackIf(input.floatValue() < 0, input, defaultValue);
-  }
-
-  @Nullable
-  @CheckReturnValue
-  public static <T> T fallbackIf(boolean expression, @Nullable T trueFlag, @Nullable T falseFlag) {
-    return expression ? trueFlag : falseFlag;
   }
 
 }

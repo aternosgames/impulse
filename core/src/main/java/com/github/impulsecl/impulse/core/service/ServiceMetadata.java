@@ -14,4 +14,5 @@ public @interface ServiceMetadata {
   String serviceCommand();
 
   String description() default "";
+
 }

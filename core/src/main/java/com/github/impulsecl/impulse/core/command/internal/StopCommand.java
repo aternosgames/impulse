@@ -3,6 +3,7 @@ package com.github.impulsecl.impulse.core.command.internal;
 import com.github.impulsecl.impulse.core.command.Command;
 import com.github.impulsecl.impulse.core.service.Service;
 import com.github.impulsecl.impulse.core.service.ServiceIndex;
+
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

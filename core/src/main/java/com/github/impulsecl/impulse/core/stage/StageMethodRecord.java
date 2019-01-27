@@ -1,8 +1,10 @@
 package com.github.impulsecl.impulse.core.stage;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.lang.reflect.Method;
 import java.util.Objects;
 
@@ -34,13 +36,14 @@ final class StageMethodRecord implements Comparable<StageMethodRecord> {
     return this;
   }
 
-  public int priority() {
-    return this.priority;
-  }
-
   @NonNull
   public Method method() {
     return this.method;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(priority, method);
   }
 
   @Override
@@ -59,17 +62,16 @@ final class StageMethodRecord implements Comparable<StageMethodRecord> {
   }
 
   @Override
-  public int hashCode() {
-    return Objects.hash(priority, method);
-  }
-
-  @Override
   public int compareTo(@NonNull StageMethodRecord other) {
     if (this.equals(other)) {
       return 0;
     }
 
     return this.priority - other.priority();
+  }
+
+  public int priority() {
+    return this.priority;
   }
 
 }

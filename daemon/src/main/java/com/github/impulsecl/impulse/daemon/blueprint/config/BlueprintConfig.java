@@ -1,9 +1,12 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+
 import com.google.common.base.MoreObjects;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.apache.commons.io.FilenameUtils;
+
 import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
@@ -11,10 +14,63 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import org.apache.commons.io.FilenameUtils;
 
 public class BlueprintConfig {
 
+  public static class Environment {
+
+    private Map<String, Object> variables;
+
+    private Environment() {
+      this.variables = new HashMap<>();
+    }
+
+    @NonNull
+    public Environment variables(@NonNull Map<String, Object> variables) {
+      this.variables = Require.requireParamNonNull(variables, "variables");
+      return this;
+    }
+
+    @NonNull
+    public Map<String, Object> variables() {
+      return this.variables;
+    }
+
+    @Override
+    public String toString() {
+      return MoreObjects.toStringHelper(this)
+          .add("variables", this.variables)
+          .toString();
+    }
+
+  }
+
+  public static class Settings {
+
+    private boolean preserveFilesOnCrash;
+
+    private Settings() {
+      this.preserveFilesOnCrash = false;
+    }
+
+    @NonNull
+    public Settings preserveFilesOnCrash(boolean preserveFilesOnCrash) {
+      this.preserveFilesOnCrash = preserveFilesOnCrash;
+      return this;
+    }
+
+    public boolean preserveFilesOnCrash() {
+      return this.preserveFilesOnCrash;
+    }
+
+    @Override
+    public String toString() {
+      return MoreObjects.toStringHelper(this)
+          .add("preserveFilesOnCrash", this.preserveFilesOnCrash)
+          .toString();
+    }
+
+  }
   private static final transient int VERSION = 1;
 
   @NonNull
@@ -37,7 +93,6 @@ public class BlueprintConfig {
       throw new IllegalStateException("Could not search for blueprint file: ", cause);
     }
   }
-
   private int version;
   private String name;
   private String runOnDeployment;
@@ -122,61 +177,6 @@ public class BlueprintConfig {
         .add("environment", this.environment)
         .add("settings", this.settings)
         .toString();
-  }
-
-  public static class Environment {
-
-    private Map<String, Object> variables;
-
-    private Environment() {
-      this.variables = new HashMap<>();
-    }
-
-    @NonNull
-    public Environment variables(@NonNull Map<String, Object> variables) {
-      this.variables = Require.requireParamNonNull(variables, "variables");
-      return this;
-    }
-
-    @NonNull
-    public Map<String, Object> variables() {
-      return this.variables;
-    }
-
-    @Override
-    public String toString() {
-      return MoreObjects.toStringHelper(this)
-          .add("variables", this.variables)
-          .toString();
-    }
-
-  }
-
-  public static class Settings {
-
-    private boolean preserveFilesOnCrash;
-
-    private Settings() {
-      this.preserveFilesOnCrash = false;
-    }
-
-    @NonNull
-    public Settings preserveFilesOnCrash(boolean preserveFilesOnCrash) {
-      this.preserveFilesOnCrash = preserveFilesOnCrash;
-      return this;
-    }
-
-    public boolean preserveFilesOnCrash() {
-      return this.preserveFilesOnCrash;
-    }
-
-    @Override
-    public String toString() {
-      return MoreObjects.toStringHelper(this)
-          .add("preserveFilesOnCrash", this.preserveFilesOnCrash)
-          .toString();
-    }
-
   }
 
 }

@@ -1,23 +1,21 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
+import com.github.impulsecl.impulse.common.semantic.Require;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.github.impulsecl.impulse.common.semantic.Require;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.apache.commons.io.FilenameUtils;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import org.apache.commons.io.FilenameUtils;
 
 public interface BlueprintConfigProvider {
-
-  Optional<BlueprintConfig> load(@NonNull Path path) throws IOException;
-
-  void save(@NonNull BlueprintConfig config, @NonNull Path path) throws IOException;
 
   @NonNull
   @CheckReturnValue
@@ -45,14 +43,14 @@ public interface BlueprintConfigProvider {
 
   @NonNull
   @CheckReturnValue
-  static BlueprintConfigProvider jackson() {
-    return new JacksonBlueprintConfigProvider();
+  static BlueprintConfigProvider jackson(@NonNull ObjectMapper objectMapper) {
+    return new JacksonBlueprintConfigProvider(objectMapper);
   }
 
   @NonNull
   @CheckReturnValue
-  static BlueprintConfigProvider jackson(@NonNull ObjectMapper objectMapper) {
-    return new JacksonBlueprintConfigProvider(objectMapper);
+  static BlueprintConfigProvider jackson() {
+    return new JacksonBlueprintConfigProvider();
   }
 
   @NonNull
@@ -84,5 +82,9 @@ public interface BlueprintConfigProvider {
 
     return globalProvider.isPresent() ? globalProvider : internalProvider;
   }
+
+  Optional<BlueprintConfig> load(@NonNull Path path) throws IOException;
+
+  void save(@NonNull BlueprintConfig config, @NonNull Path path) throws IOException;
 
 }

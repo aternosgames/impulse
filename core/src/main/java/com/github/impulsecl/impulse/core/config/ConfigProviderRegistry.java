@@ -2,8 +2,10 @@ package com.github.impulsecl.impulse.core.config;
 
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -24,16 +26,15 @@ public class ConfigProviderRegistry {
 
   @NonNull
   @CheckReturnValue
-  protected static ConfigProviderRegistry internal() {
-    return ConfigProviderRegistry.INTERNAL;
-  }
-
-  @NonNull
-  @CheckReturnValue
   public static ConfigProviderRegistry global() {
     return ConfigProviderRegistry.GLOBAL;
   }
 
+  @NonNull
+  @CheckReturnValue
+  protected static ConfigProviderRegistry internal() {
+    return ConfigProviderRegistry.INTERNAL;
+  }
   private Map<String, ConfigProvider> registeredProviders;
 
   @CheckReturnValue
@@ -66,19 +67,19 @@ public class ConfigProviderRegistry {
     return this;
   }
 
+  @CheckReturnValue
+  public boolean hasProvider(@NonNull String fileExtension) {
+    Require.requireParamNonNull(fileExtension, "fileExtension");
+
+    return this.getProvider(fileExtension).isPresent();
+  }
+
   @NonNull
   @CheckReturnValue
   public Optional<ConfigProvider> getProvider(@NonNull String fileExtension) {
     Require.requireParamNonNull(fileExtension, "fileExtension");
 
     return Optional.ofNullable(this.registeredProviders.get(fileExtension));
-  }
-
-  @CheckReturnValue
-  public boolean hasProvider(@NonNull String fileExtension) {
-    Require.requireParamNonNull(fileExtension, "fileExtension");
-
-    return this.getProvider(fileExtension).isPresent();
   }
 
   @NonNull

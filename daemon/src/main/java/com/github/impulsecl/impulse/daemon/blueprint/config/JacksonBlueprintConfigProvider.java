@@ -1,12 +1,14 @@
 package com.github.impulsecl.impulse.daemon.blueprint.config;
 
+import com.github.impulsecl.impulse.common.semantic.Require;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.github.impulsecl.impulse.common.semantic.Require;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;

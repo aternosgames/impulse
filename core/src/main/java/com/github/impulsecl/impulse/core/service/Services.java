@@ -1,8 +1,10 @@
 package com.github.impulsecl.impulse.core.service;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.util.Optional;
 
 final class Services {

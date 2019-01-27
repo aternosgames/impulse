@@ -2,15 +2,17 @@ package com.github.impulsecl.impulse.daemon.blueprint.deploy;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 import com.github.impulsecl.impulse.daemon.blueprint.config.BlueprintConfig;
+
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class StandardBlueprintDeployer implements BlueprintDeployer {
 
