@@ -1,6 +1,7 @@
 package com.github.impulsecl.impulse.core.command;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ public class StandardCommandProvider implements CommandProvider {
   private static final Map<String, Command> COMMANDS = new HashMap<>();
 
   @NonNull
+  @CheckReturnValue
   public static CommandProvider create() {
     return new StandardCommandProvider();
   }
@@ -37,6 +39,7 @@ public class StandardCommandProvider implements CommandProvider {
   }
 
   @NonNull
+  @CheckReturnValue
   private String buildCommandLine(@NonNull String[] splittedCommandLine) {
     Require.requireParamNonNull(splittedCommandLine, "splittedCommandLine");
     StringBuilder stringBuilder = new StringBuilder();
