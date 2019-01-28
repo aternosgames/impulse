@@ -2,8 +2,6 @@ package com.github.impulsecl.impulse.core.command.graph;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 import com.github.impulsecl.impulse.core.command.CommandModel;
-import com.github.impulsecl.impulse.core.command.CommandRoute;
-import com.github.impulsecl.impulse.core.command.CommandVariable;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 
@@ -23,17 +21,17 @@ public class StandardCommandGraphGenerator implements CommandGraphGenerator {
 
     printStream.println(" ");
 
-    for (CommandRoute route : model.routes()) {
+    model.routes().forEach(route -> {
       printStream.println(" ".repeat(3) + "| " + route.name());
 
-      for (CommandVariable variable : route.variables()) {
+      route.variables().forEach(variable -> {
         printStream.println(" ".repeat(4) + "\\ " + variable.name() + " [" + variable.index() + "]");
         printStream.println(" ".repeat(4) + " | desc: " + variable.description());
         printStream.println(" ".repeat(4) + " | type: " + variable.type().getName());
         printStream.println(" ".repeat(4) + " | optional: " + variable.optional());
         printStream.println(" ");
-      }
-    }
+      });
+    });
   }
 
 }
