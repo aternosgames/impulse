@@ -5,6 +5,8 @@ import com.github.impulsecl.impulse.common.semantic.Require;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
+import java.util.Collection;
+
 public class GatewayModel {
 
   @NonNull
@@ -14,7 +16,7 @@ public class GatewayModel {
   }
 
   private String url;
-  private GatewayMethod[] gatewayMethods;
+  private Collection<GatewayMethod> gatewayMethods;
 
   @NonNull
   public String url() {
@@ -29,13 +31,13 @@ public class GatewayModel {
   }
 
   @NonNull
-  public GatewayMethod[] gatewayMethods() {
+  public Collection<GatewayMethod> gatewayMethods() {
     return this.gatewayMethods;
   }
 
   @NonNull
   @CheckReturnValue
-  public GatewayModel gatewayMethods(@NonNull GatewayMethod[] gatewayMethods) {
+  public GatewayModel gatewayMethods(@NonNull Collection<GatewayMethod> gatewayMethods) {
     this.gatewayMethods = Require.requireParamNonNull(gatewayMethods, "gatewayMethods");
     return this;
   }

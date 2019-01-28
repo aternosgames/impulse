@@ -45,7 +45,7 @@ public class StandardGatewayCompiler implements GatewayModelCompiler {
 
     return GatewayModel.create()
         .url(requestMapping.value())
-        .gatewayMethods(loadedGatewayMethods.toArray(new GatewayMethod[]{}));
+        .gatewayMethods(loadedGatewayMethods);
   }
 
 }
