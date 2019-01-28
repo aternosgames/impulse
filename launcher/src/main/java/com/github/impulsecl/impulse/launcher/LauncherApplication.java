@@ -38,7 +38,6 @@ public class LauncherApplication {
 
           if (optionalService.isPresent()) {
             Service service = optionalService.get();
-            ServiceIndex.registerService(service);
             service.start();
 
             Runtime.getRuntime().addShutdownHook(new Thread(service::stop));
