@@ -82,7 +82,7 @@ public class CommandRouteBuilder {
   @NonNull
   public CommandRouteBuilder variable(@NonNull CommandVariable variable) {
     if (!this.variables.add(Require.requireParamNonNull(variable, "variable"))) {
-      // TODO Print trace output that the route could not be added
+      // TODO Print trace output that the variable could not be added
     }
 
     return this;
