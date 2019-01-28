@@ -10,8 +10,6 @@ import java.util.List;
 
 public class DoubleInputConverter implements InputConverter<Double> {
 
-  public static final DoubleInputConverter INSTANCE = new DoubleInputConverter();
-
   @NonNull
   @Override
   @CheckReturnValue

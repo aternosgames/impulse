@@ -10,8 +10,6 @@ import java.util.List;
 
 public class ByteInputConverter implements InputConverter<Byte> {
 
-  public static final ByteInputConverter INSTANCE = new ByteInputConverter();
-
   @NonNull
   @Override
   @CheckReturnValue

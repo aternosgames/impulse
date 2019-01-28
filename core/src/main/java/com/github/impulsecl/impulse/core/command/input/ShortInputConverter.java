@@ -10,8 +10,6 @@ import java.util.List;
 
 public class ShortInputConverter implements InputConverter<Short> {
 
-  public static final ShortInputConverter INSTANCE = new ShortInputConverter();
-
   @NonNull
   @Override
   @CheckReturnValue

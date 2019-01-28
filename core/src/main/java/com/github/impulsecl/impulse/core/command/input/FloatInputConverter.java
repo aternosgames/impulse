@@ -10,8 +10,6 @@ import java.util.List;
 
 public class FloatInputConverter implements InputConverter<Float> {
 
-  public static final FloatInputConverter INSTANCE = new FloatInputConverter();
-
   @NonNull
   @Override
   @CheckReturnValue

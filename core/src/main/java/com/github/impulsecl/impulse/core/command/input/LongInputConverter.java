@@ -10,8 +10,6 @@ import java.util.List;
 
 public class LongInputConverter implements InputConverter<Long> {
 
-  public static final LongInputConverter INSTANCE = new LongInputConverter();
-
   @NonNull
   @Override
   @CheckReturnValue

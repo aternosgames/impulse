@@ -10,8 +10,6 @@ import java.util.List;
 
 public class IntegerInputConverter implements InputConverter<Integer> {
 
-  public static final IntegerInputConverter INSTANCE = new IntegerInputConverter();
-
   @NonNull
   @Override
   @CheckReturnValue
