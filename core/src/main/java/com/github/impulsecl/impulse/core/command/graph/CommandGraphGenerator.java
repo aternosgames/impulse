@@ -1,4 +1,6 @@
-package com.github.impulsecl.impulse.core.command;
+package com.github.impulsecl.impulse.core.command.graph;
+
+import com.github.impulsecl.impulse.core.command.CommandModel;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 

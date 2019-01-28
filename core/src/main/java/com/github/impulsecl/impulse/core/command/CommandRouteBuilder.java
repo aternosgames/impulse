@@ -74,7 +74,7 @@ public class CommandRouteBuilder {
   @NonNull
   public CommandRouteBuilder name(@NonNull String name) {
     Require.requireParamNonNull(name, "name");
-    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(name), "Name cannot be empty");
+    Preconditions.checkArgument(!CommandBuilderCommons.isEmpty(name), "Name cannot be empty");
     CommandBuilderCommons.validateForIllegalCharacters(name);
 
     this.name = name;
@@ -84,7 +84,7 @@ public class CommandRouteBuilder {
   @NonNull
   public CommandRouteBuilder description(@NonNull String description) {
     Require.requireParamNonNull(description, "description");
-    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(description), "Description cannot be empty");
+    Preconditions.checkArgument(!CommandBuilderCommons.isEmpty(description), "Description cannot be empty");
 
     this.description = description;
     return this;

@@ -105,6 +105,7 @@ public class StandardCommandModelCompiler implements CommandModelCompiler {
           .description(variable.desc())
           .optional(variable.optional())
           .name(variable.name())
+          .type(variable.type())
           .index(idx);
 
       Class<?> parameterType = parameterTypes[idx];

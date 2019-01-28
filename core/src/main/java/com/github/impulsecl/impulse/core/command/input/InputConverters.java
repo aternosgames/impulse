@@ -22,6 +22,7 @@ public class InputConverters {
     InputConverters.register(new IntegerInputConverter());
     InputConverters.register(new LongInputConverter());
     InputConverters.register(new ShortInputConverter());
+    InputConverters.register(new StringInputConverter());
   }
 
   public static <T> void register(@NonNull InputConverter<T> converter) {

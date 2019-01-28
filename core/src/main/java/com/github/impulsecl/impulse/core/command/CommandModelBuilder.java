@@ -62,7 +62,7 @@ public class CommandModelBuilder {
   @NonNull
   public CommandModelBuilder label(@NonNull String label) {
     Require.requireParamNonNull(label, "label");
-    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(label), "Label cannot be empty");
+    Preconditions.checkArgument(!CommandBuilderCommons.isEmpty(label), "Label cannot be empty");
     CommandBuilderCommons.validateForIllegalCharacters(label);
 
     this.label = label;
