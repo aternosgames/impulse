@@ -14,9 +14,17 @@ public class InputConverters {
 
   private static final Set<InputConverter<?>> INPUT_CONVERTERS = new HashSet<>();
 
-  @NonNull
-  @CheckReturnValue
-  public static <T> InputConverters register(@NonNull InputConverter<T> converter) {
+  static {
+    InputConverters.register(new BooleanInputConverter());
+    InputConverters.register(new ByteInputConverter());
+    InputConverters.register(new DoubleInputConverter());
+    InputConverters.register(new FloatInputConverter());
+    InputConverters.register(new IntegerInputConverter());
+    InputConverters.register(new LongInputConverter());
+    InputConverters.register(new ShortInputConverter());
+  }
+
+  public static <T> void register(@NonNull InputConverter<T> converter) {
     if (!INPUT_CONVERTERS.add(Require.requireParamNonNull(converter, "converter"))) {
       // TODO Print trace output that the variable could not be added
     }
