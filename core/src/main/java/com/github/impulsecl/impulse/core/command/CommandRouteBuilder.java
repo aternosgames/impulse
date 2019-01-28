@@ -1,7 +1,10 @@
 package com.github.impulsecl.impulse.core.command;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import com.github.impulsecl.impulse.core.command.compiler.StandardCommandModelCompiler;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Preconditions;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
@@ -9,6 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class CommandRouteBuilder {
 
@@ -69,13 +73,20 @@ public class CommandRouteBuilder {
 
   @NonNull
   public CommandRouteBuilder name(@NonNull String name) {
-    this.name = Require.requireParamNonNull(name, "name");
+    Require.requireParamNonNull(name, "name");
+    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(name), "Name cannot be empty");
+    CommandBuilderCommons.validateForIllegalCharacters(name);
+
+    this.name = name;
     return this;
   }
 
   @NonNull
   public CommandRouteBuilder description(@NonNull String description) {
-    this.description = Require.requireParamNonNull(description, "description");
+    Require.requireParamNonNull(description, "description");
+    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(description), "Description cannot be empty");
+
+    this.description = description;
     return this;
   }
 
@@ -90,7 +101,7 @@ public class CommandRouteBuilder {
 
   @NonNull
   @CheckReturnValue
-  public CommandRoute build() {
+  public CommandRoute finish() {
     return new RawCommandRoute(this.name, this.description, this.variables);
   }
 

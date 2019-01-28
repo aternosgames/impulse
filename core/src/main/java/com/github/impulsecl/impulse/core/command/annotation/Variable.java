@@ -17,4 +17,6 @@ public @interface Variable {
 
   String desc() default "";
 
+  boolean optional() default false;
+
 }

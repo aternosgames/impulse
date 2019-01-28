@@ -2,10 +2,13 @@ package com.github.impulsecl.impulse.core.command.compiler;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 import com.github.impulsecl.impulse.core.command.CommandModel;
+import com.github.impulsecl.impulse.core.command.CommandRoute;
+import com.github.impulsecl.impulse.core.command.CommandVariable;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -28,7 +31,7 @@ public interface CommandModelCompiler {
     }
 
     return Arrays.stream(classes)
-        .map(this::compile)
+        .map(this::compileModel)
         .collect(Collectors.toList());
   }
 
@@ -42,12 +45,20 @@ public interface CommandModelCompiler {
     }
 
     return classes.stream()
-        .map(this::compile)
+        .map(this::compileModel)
         .collect(Collectors.toList());
   }
 
   @NonNull
   @CheckReturnValue
-  CommandModel compile(@NonNull Class<?> clazz);
+  CommandModel compileModel(@NonNull Class<?> clazz);
+
+  @NonNull
+  @CheckReturnValue
+  CommandRoute compileRoute(@NonNull Method method);
+
+  @NonNull
+  @CheckReturnValue
+  Collection<CommandVariable> compileVariables(@NonNull Method method);
 
 }

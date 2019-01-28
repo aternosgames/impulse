@@ -20,7 +20,7 @@ public final class ServiceIndexRecord {
     if (metadata.isEmpty()) {
       if (!disposeException) {
         throw new ServiceIndexException(
-            serviceClass.getName() + " is missing class type annotation '" + ServiceMetadata.class.getName() + "'");
+            serviceClass.getName() + " is missing class compatibleTypes annotation '" + ServiceMetadata.class.getName() + "'");
       }
 
       return;

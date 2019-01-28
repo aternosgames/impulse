@@ -1,7 +1,10 @@
 package com.github.impulsecl.impulse.core.command;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import com.github.impulsecl.impulse.core.command.input.InputConverter;
+import com.github.impulsecl.impulse.core.command.input.InputConverters;
 
+import com.google.common.base.Preconditions;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
@@ -78,13 +81,20 @@ public class CommandVariableBuilder {
 
   @NonNull
   public CommandVariableBuilder name(@NonNull String name) {
-    this.name = Require.requireParamNonNull(name, "name");
+    Require.requireParamNonNull(name, "name");
+    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(name), "Name cannot be empty");
+    CommandBuilderCommons.validateForIllegalCharacters(name);
+
+    this.name = name;
     return this;
   }
 
   @NonNull
   public CommandVariableBuilder description(@NonNull String description) {
-    this.description = Require.requireParamNonNull(description, "description");
+    Require.requireParamNonNull(description, "description");
+    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(description), "Description cannot be empty");
+
+    this.description = description;
     return this;
   }
 
@@ -96,13 +106,22 @@ public class CommandVariableBuilder {
 
   @NonNull
   public CommandVariableBuilder type(@NonNull Class<?> type) {
-    this.type = Require.requireParamNonNull(type, "type");
+    Require.requireParamNonNull(type, "type");
+
+    if (InputConverters.query(type).isEmpty()) {
+      throw new IllegalStateException("Could not query input converter for type " + type.getName() + "!"
+          + " You can register a custom input converter by doing the following:\n"
+          + "   1. Implement one using the interface " + InputConverter.class.getName() + "\n"
+          + "   2. Register it by calling " + InputConverters.class.getName() + "#register(InputConverter<T>)");
+    }
+
+    this.type = type;
     return this;
   }
 
   @NonNull
   @CheckReturnValue
-  public CommandVariable build() {
+  public CommandVariable finish() {
     return new RawCommandVariable(this.idx, this.name, this.description, this.optional, this.type);
   }
 

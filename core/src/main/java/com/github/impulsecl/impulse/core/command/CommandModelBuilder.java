@@ -2,6 +2,7 @@ package com.github.impulsecl.impulse.core.command;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 
+import com.google.common.base.Preconditions;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
@@ -60,7 +61,11 @@ public class CommandModelBuilder {
 
   @NonNull
   public CommandModelBuilder label(@NonNull String label) {
-    this.label = Require.requireParamNonNull(label, "label");
+    Require.requireParamNonNull(label, "label");
+    Preconditions.checkArgument(CommandBuilderCommons.isEmpty(label), "Label cannot be empty");
+    CommandBuilderCommons.validateForIllegalCharacters(label);
+
+    this.label = label;
     return this;
   }
 

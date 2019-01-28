@@ -44,7 +44,7 @@ public class Require {
       case PARAMETER:
         return Objects.requireNonNull(input, parameterNull(name));
       default:
-        throw new IllegalArgumentException("Requirement type is out of bounds [type=" + type + "]");
+        throw new IllegalArgumentException("Requirement compatibleTypes is out of bounds [compatibleTypes=" + type + "]");
     }
   }
 
@@ -59,7 +59,7 @@ public class Require {
   public static <T extends Number> T requireSignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
     Require.requireNonNull(input, "input", Type.PARAMETER);
     Require.requireNonNull(name, "name", Type.PARAMETER);
-    Require.requireNonNull(type, "type", Type.PARAMETER);
+    Require.requireNonNull(type, "compatibleTypes", Type.PARAMETER);
 
     switch (type) {
       case FIELD:
@@ -104,7 +104,7 @@ public class Require {
   public static <T extends Number> T requireUnsignedNumber(@NonNull T input, @NonNull String name, @NonNull Type type) {
     Require.requireNonNull(input, "input", Type.PARAMETER);
     Require.requireNonNull(name, "name", Type.PARAMETER);
-    Require.requireNonNull(type, "type", Type.PARAMETER);
+    Require.requireNonNull(type, "compatibleTypes", Type.PARAMETER);
 
     switch (type) {
       case FIELD:
