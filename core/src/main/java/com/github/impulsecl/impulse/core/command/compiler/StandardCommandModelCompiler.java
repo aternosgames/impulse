@@ -34,11 +34,14 @@ public class StandardCommandModelCompiler implements CommandModelCompiler {
     Require.requireParamNonNull(clazz, "clazz");
 
     if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers())) {
-      throw new IllegalStateException(clazz.getName() + "");
+      throw new IllegalStateException(clazz.getName() + " is a nested class which "
+          + "is missing the 'static' access modifier. The 'static' "
+          + "access modifier is mandatory for nested classes.");
     }
 
     if (!clazz.isAnnotationPresent(Model.class)) {
-      throw new IllegalStateException(clazz.getName() + "");
+      throw new IllegalStateException(clazz.getName() + " does not declare "
+          + "an annotation of type " + Model.class.getName());
     }
 
     Model model = clazz.getDeclaredAnnotation(Model.class);
@@ -62,7 +65,8 @@ public class StandardCommandModelCompiler implements CommandModelCompiler {
     Require.requireParamNonNull(method, "method");
 
     if (!method.isAnnotationPresent(Route.class)) {
-      throw new IllegalStateException(method.getName() + "");
+      throw new IllegalStateException(method.getName() + " does not declare "
+          + "an annotation of type " + Route.class.getName());
     }
 
     Route route = method.getDeclaredAnnotation(Route.class);
@@ -84,7 +88,9 @@ public class StandardCommandModelCompiler implements CommandModelCompiler {
 
     Collection<Variable> variableCollection = this.collectVariableAnnotations(method);
     if (!(variableCollection.size() == method.getParameterCount())) {
-      throw new IllegalStateException(method.getName() + "");
+      throw new IllegalStateException(method.getDeclaringClass().getName()
+          + "#" + method.getName() + "'s parameter count does not match "
+          + "with the count of declared " + Variable.class.getName() + " annotations");
     }
 
     Class<?>[] parameterTypes = method.getParameterTypes();
@@ -102,6 +108,7 @@ public class StandardCommandModelCompiler implements CommandModelCompiler {
           .index(idx);
 
       Class<?> parameterType = parameterTypes[idx];
+
       if (variable.optional()) {
         if (!parameterType.equals(Optional.class)) {
           throw new IllegalStateException("Variable '" + variable.name() + "' is marked as "
