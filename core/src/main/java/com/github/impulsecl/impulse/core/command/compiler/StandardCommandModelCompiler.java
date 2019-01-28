@@ -9,7 +9,7 @@ import com.github.impulsecl.impulse.core.command.CommandVariable;
 import com.github.impulsecl.impulse.core.command.CommandVariableBuilder;
 import com.github.impulsecl.impulse.core.command.annotation.Model;
 import com.github.impulsecl.impulse.core.command.annotation.Route;
-import com.github.impulsecl.impulse.core.command.annotation.Variable;
+import com.github.impulsecl.impulse.core.command.annotation.Value;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -86,41 +86,41 @@ public class StandardCommandModelCompiler implements CommandModelCompiler {
   public Collection<CommandVariable> compileVariables(@NonNull Method method) {
     Require.requireParamNonNull(method, "method");
 
-    Collection<Variable> variableCollection = this.collectVariableAnnotations(method);
-    if (!(variableCollection.size() == method.getParameterCount())) {
+    Collection<Value> valueCollection = this.collectVariableAnnotations(method);
+    if (!(valueCollection.size() == method.getParameterCount())) {
       throw new IllegalStateException(method.getDeclaringClass().getName()
           + "#" + method.getName() + "'s parameter count does not match "
-          + "with the count of declared " + Variable.class.getName() + " annotations");
+          + "with the count of declared " + Value.class.getName() + " annotations");
     }
 
     Class<?>[] parameterTypes = method.getParameterTypes();
     List<CommandVariable> compiledVariables = new ArrayList<>();
 
-    Variable[] variableArray = new Variable[variableCollection.size()];
-    variableCollection.toArray(variableArray);
+    Value[] valueArray = new Value[valueCollection.size()];
+    valueCollection.toArray(valueArray);
 
-    for (int idx = 0; idx < variableArray.length; idx++) {
-      Variable variable = variableArray[idx];
+    for (int idx = 0; idx < valueArray.length; idx++) {
+      Value value = valueArray[idx];
       CommandVariableBuilder variableBuilder = CommandVariableBuilder.begin()
-          .description(variable.desc())
-          .optional(variable.optional())
-          .name(variable.name())
-          .type(variable.type())
+          .description(value.desc())
+          .optional(value.optional())
+          .name(value.name())
+          .type(value.type())
           .index(idx);
 
       Class<?> parameterType = parameterTypes[idx];
 
-      if (variable.optional()) {
+      if (value.optional()) {
         if (!parameterType.equals(Optional.class)) {
-          throw new IllegalStateException("Variable '" + variable.name() + "' is marked as "
+          throw new IllegalStateException("Value '" + value.name() + "' is marked as "
               + "optional but corresponding function does not declare "
               + "a type of " + Optional.class.getName() + " at index " + idx);
         }
       } else {
         if (parameterType.equals(Optional.class)) {
-          throw new IllegalStateException("Variable '" + variable.name() + "' is marked as "
+          throw new IllegalStateException("Value '" + value.name() + "' is marked as "
               + "non optional but corresponding function does not declare "
-              + "a type of " + variable.type().getName() + " at index " + idx);
+              + "a type of " + value.type().getName() + " at index " + idx);
         }
       }
 
@@ -136,8 +136,8 @@ public class StandardCommandModelCompiler implements CommandModelCompiler {
         .collect(Collectors.toList());
   }
 
-  private Collection<Variable> collectVariableAnnotations(Method method) {
-    return Arrays.stream(method.getDeclaredAnnotationsByType(Variable.class))
+  private Collection<Value> collectVariableAnnotations(Method method) {
+    return Arrays.stream(method.getDeclaredAnnotationsByType(Value.class))
         .collect(Collectors.toList());
   }
 
