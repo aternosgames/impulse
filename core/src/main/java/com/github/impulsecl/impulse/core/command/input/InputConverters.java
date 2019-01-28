@@ -13,7 +13,6 @@ import java.util.Set;
 public class InputConverters {
 
   private static final Set<InputConverter<?>> INPUT_CONVERTERS = new HashSet<>();
-  private static final InputConverters INSTANCE = new InputConverters();
 
   @NonNull
   @CheckReturnValue
@@ -21,8 +20,6 @@ public class InputConverters {
     if (!INPUT_CONVERTERS.add(Require.requireParamNonNull(converter, "converter"))) {
       // TODO Print trace output that the variable could not be added
     }
-
-    return InputConverters.INSTANCE;
   }
 
   @NonNull
