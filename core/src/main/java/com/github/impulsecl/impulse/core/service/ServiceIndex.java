@@ -14,13 +14,6 @@ public class ServiceIndex {
 
   private static final ServiceIndexLoader SERVICE_INDEX_LOADER = ServiceIndexLoader.create();
   private static final Set<ServiceIndexRecord> RECORDS = new HashSet<>();
-  private static final Set<Service> SERVICES = new HashSet<>();
-
-  public static void registerService(@NonNull Service service) {
-    Require.requireParamNonNull(service, "service");
-
-    SERVICES.add(service);
-  }
 
   public static void registerRecordRecursive() {
     Collection<ServiceIndexRecord> serviceIndexRecords = SERVICE_INDEX_LOADER.loadServices();
@@ -33,13 +26,8 @@ public class ServiceIndex {
   private static void registerRecord(@NonNull ServiceIndexRecord serviceIndexRecord) {
     Require.requireParamNonNull(serviceIndexRecord, "serviceIndexRecord");
 
+    serviceIndexRecord.active(true);
     RECORDS.add(serviceIndexRecord);
-  }
-
-  @NonNull
-  @CheckReturnValue
-  public static Collection<Service> getServices() {
-    return Collections.unmodifiableCollection(SERVICES);
   }
 
   @NonNull

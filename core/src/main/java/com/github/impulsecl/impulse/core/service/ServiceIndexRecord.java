@@ -8,10 +8,14 @@ import java.util.Optional;
 
 public final class ServiceIndexRecord {
 
+  private static final ServiceInvoker SERVICE_INVOKER = ServiceInvoker.create();
+
   private String name;
   private String serviceCommand;
   private String description;
+  private boolean active;
   private Class<?> serviceClass;
+  private Service service;
 
   public ServiceIndexRecord(@NonNull Class<?> serviceClass, boolean disposeException) {
     Require.requireParamNonNull(serviceClass, "serviceClass");
@@ -20,18 +24,28 @@ public final class ServiceIndexRecord {
     if (metadata.isEmpty()) {
       if (!disposeException) {
         throw new ServiceIndexException(
-            serviceClass.getName() + " is missing class compatibleTypes annotation '" + ServiceMetadata.class.getName() + "'");
+            serviceClass.getName() + " is missing class compatibleTypes annotation '" + ServiceMetadata.class.getName()
+                + "'");
       }
-
       return;
     }
 
     ServiceMetadata rawMetadata = metadata.get();
 
+    Optional<Service> optionalService = SERVICE_INVOKER.invokeService(serviceClass);
+
     this.serviceClass = serviceClass;
     this.name = rawMetadata.name();
     this.serviceCommand = rawMetadata.serviceCommand();
     this.description = rawMetadata.description();
+
+    if (optionalService.isEmpty()) {
+      if (!disposeException) {
+        throw new ServiceIndexException(serviceClass.getName() + " cannot parsed to an service class");
+      }
+    }
+
+    this.service = optionalService.get();
   }
 
   @NonNull
@@ -49,9 +63,24 @@ public final class ServiceIndexRecord {
     return this.description;
   }
 
+  public boolean active() {
+    return this.active;
+  }
+
+  @NonNull
+  public ServiceIndexRecord active(boolean active) {
+    this.active = active;
+    return this;
+  }
+
   @NonNull
   public Class<?> serviceClass() {
     return this.serviceClass;
+  }
+
+  @NonNull
+  public Service service() {
+    return this.service;
   }
 
 }
