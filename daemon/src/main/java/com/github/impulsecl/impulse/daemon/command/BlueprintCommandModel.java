@@ -11,9 +11,9 @@ public class BlueprintCommandModel {
 
   @Route(name = "init", desc = "Generate a new blueprint")
   @Variable(name = "name", type = String.class, desc = "Name of the blueprint")
-  @Variable(name = "preset", type = String.class, desc = "Preset to use")
+  @Variable(name = "preset", type = String.class, desc = "Preset to use", optional = true)
   private void initBlueprint(String name, Optional<String> preset) {
-    
+
   }
 
   @Route(name = "configure", desc = "Generate missing configuration files")
