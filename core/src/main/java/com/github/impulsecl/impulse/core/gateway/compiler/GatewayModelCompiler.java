@@ -9,6 +9,6 @@ public interface GatewayModelCompiler {
 
   @NonNull
   @CheckReturnValue
-  GatewayModel compileAll(@NonNull Class<?> gatewayModel);
+  GatewayModel compileAll(@NonNull Class<?> gatewayModelClass);
 
 }
