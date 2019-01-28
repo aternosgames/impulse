@@ -10,12 +10,18 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ServiceIndex {
+final class ServiceIndex {
 
   private static final ServiceIndexLoader SERVICE_INDEX_LOADER = ServiceIndexLoader.create();
   private static final Set<ServiceIndexRecord> RECORDS = new HashSet<>();
 
-  public static void registerRecordRecursive() {
+  @NonNull
+  @CheckReturnValue
+  static ServiceIndex create() {
+    return new ServiceIndex();
+  }
+
+  void registerRecordRecursive() {
     Collection<ServiceIndexRecord> serviceIndexRecords = SERVICE_INDEX_LOADER.loadServices();
 
     for (ServiceIndexRecord serviceIndexRecord : serviceIndexRecords) {
@@ -23,7 +29,7 @@ public class ServiceIndex {
     }
   }
 
-  private static void registerRecord(@NonNull ServiceIndexRecord serviceIndexRecord) {
+  void registerRecord(@NonNull ServiceIndexRecord serviceIndexRecord) {
     Require.requireParamNonNull(serviceIndexRecord, "serviceIndexRecord");
 
     serviceIndexRecord.active(true);
@@ -32,8 +38,9 @@ public class ServiceIndex {
 
   @NonNull
   @CheckReturnValue
-  public static Collection<ServiceIndexRecord> getRecords() {
+  Collection<ServiceIndexRecord> getRecords() {
     return Collections.unmodifiableCollection(RECORDS);
   }
+
 
 }

@@ -7,6 +7,8 @@ import java.util.Collection;
 
 public class StandardServiceProvider implements ServiceProvider {
 
+  private static final ServiceIndex SERVICE_INDEX = ServiceIndex.create();
+
   @NonNull
   @CheckReturnValue
   public static StandardServiceProvider create() {
@@ -15,14 +17,14 @@ public class StandardServiceProvider implements ServiceProvider {
 
   @Override
   public void registerRecordRecursive() {
-    ServiceIndex.registerRecordRecursive();
+    SERVICE_INDEX.registerRecordRecursive();
   }
 
   @NonNull
   @Override
   @CheckReturnValue
   public Collection<ServiceIndexRecord> getRecords() {
-    return ServiceIndex.getRecords();
+    return SERVICE_INDEX.getRecords();
   }
 
 }
