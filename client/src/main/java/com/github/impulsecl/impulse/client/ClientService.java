@@ -8,11 +8,10 @@ import com.github.impulsecl.impulse.core.stage.StandardStagePipeline;
 @ServiceMetadata(name = "Client", serviceCommand = "c", description = "The client communicating with the daemons")
 public class ClientService extends AbstractService {
 
-  private static final StagePipeline STAGE_PIPELINE = StandardStagePipeline.create();
-
   @Override
   public void start() {
-    STAGE_PIPELINE.processRecursively(ClientStartPipeline.class);
+    StagePipeline stagePipeline = StandardStagePipeline.create();
+    stagePipeline.processRecursively(ClientStartPipeline.class);
   }
 
   @Override

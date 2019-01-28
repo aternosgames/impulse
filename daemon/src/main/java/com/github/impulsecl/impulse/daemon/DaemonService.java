@@ -9,11 +9,10 @@ import com.github.impulsecl.impulse.core.stage.StandardStagePipeline;
     description = "Responsible service for deploy Minecraft servers using blueprints")
 public class DaemonService extends AbstractService {
 
-  private static final StagePipeline STAGE_PIPELINE = StandardStagePipeline.create();
-
   @Override
   public void start() {
-    STAGE_PIPELINE.processRecursively(DaemonStartPipeline.class);
+    StagePipeline stagePipeline = StandardStagePipeline.create();
+    stagePipeline.processRecursively(DaemonStartPipeline.class);
   }
 
   @Override

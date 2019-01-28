@@ -8,11 +8,10 @@ import com.github.impulsecl.impulse.core.stage.StandardStagePipeline;
 @ServiceMetadata(name = "Swarm", serviceCommand = "s", description = "Communicate with the daemons and clients")
 public class SwarmService extends AbstractService {
 
-  private static final StagePipeline STAGE_PIPELINE = StandardStagePipeline.create();
-
   @Override
   public void start() {
-    STAGE_PIPELINE.processRecursively(SwarmStartPipeline.class);
+    StagePipeline stagePipeline = StandardStagePipeline.create();
+    stagePipeline.processRecursively(SwarmStartPipeline.class);
   }
 
   @Override
