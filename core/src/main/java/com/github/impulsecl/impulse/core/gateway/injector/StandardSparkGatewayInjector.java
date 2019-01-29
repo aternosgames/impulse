@@ -60,9 +60,58 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
 
             return method.invoke(method.getDeclaringClass().newInstance(), parameters);
           });
-
         } else if (requestKind.equals(RequestKind.GET)) {
           Spark.get(gatewayModel.path() + "/" + gatewayMethod.route(), (request, response) -> {
+            response.header("Content-Type", "application/json");
+
+            Collection<Parameter> parameterCollection = gatewayMethod.parameters();
+
+            Object[] parameters = new Object[parameterCollection.size()];
+
+            int index = 0;
+            for (Parameter parameter : parameterCollection) {
+              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+
+              if (query.isPresent()) {
+                InputConverter<?> inputConverter = query.get();
+                Object convertedObject = inputConverter.convert(request.queryMap().value(parameter.name()));
+
+                parameters[index] = convertedObject;
+              }
+              index++;
+            }
+
+            Method method = gatewayMethod.method();
+
+            return method.invoke(method.getDeclaringClass().newInstance(), parameters);
+          });
+        } else if (requestKind.equals(RequestKind.PUT)) {
+          Spark.put(gatewayModel.path() + "/" + gatewayMethod.route(), (request, response) -> {
+            response.header("Content-Type", "application/json");
+
+            Collection<Parameter> parameterCollection = gatewayMethod.parameters();
+
+            Object[] parameters = new Object[parameterCollection.size()];
+
+            int index = 0;
+            for (Parameter parameter : parameterCollection) {
+              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+
+              if (query.isPresent()) {
+                InputConverter<?> inputConverter = query.get();
+                Object convertedObject = inputConverter.convert(request.queryMap().value(parameter.name()));
+
+                parameters[index] = convertedObject;
+              }
+              index++;
+            }
+
+            Method method = gatewayMethod.method();
+
+            return method.invoke(method.getDeclaringClass().newInstance(), parameters);
+          });
+        } else if (requestKind.equals(RequestKind.DELETE)) {
+          Spark.delete(gatewayModel.path() + "/" + gatewayMethod.route(), (request, response) -> {
             response.header("Content-Type", "application/json");
 
             Collection<Parameter> parameterCollection = gatewayMethod.parameters();

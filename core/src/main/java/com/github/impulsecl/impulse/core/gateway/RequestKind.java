@@ -4,5 +4,7 @@ public enum RequestKind {
 
   POST,
   GET,
+  PUT,
+  DELETE
 
 }
