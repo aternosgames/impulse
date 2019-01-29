@@ -20,6 +20,7 @@ public class SimpleInputConverterRegistry implements InputConverterRegistry {
   @CheckReturnValue
   public SimpleInputConverterRegistry() {
     this.boundConverters = new HashSet<>();
+    this.addDefaults();
   }
 
   @CheckReturnValue
