@@ -67,12 +67,34 @@ public class StandardGatewayModelCompiler implements GatewayModelCompiler {
         GatewayMethod gatewayMethod = GatewayMethod.create()
             .route(route.name())
             .gatewayRequestKind(route.requestKind())
-            .method(method);
+            .method(method)
+            .parameters(this.parseParameters(parameters));
         loadedGatewayMethods.add(gatewayMethod);
       }
     }
 
     return loadedGatewayMethods;
+  }
+
+  @NonNull
+  @CheckReturnValue
+  private Collection<Object> parseParameters(@NonNull Collection<Parameter> parameters) {
+    Require.requireParamNonNull(parameters, "parameters");
+
+    List<Object> parsedParameters = new ArrayList<>();
+
+    for (Parameter parameter : parameters) {
+      Class<?> type = parameter.type();
+
+      try {
+        Object object = type.newInstance();
+        parsedParameters.add(object);
+      } catch (InstantiationException | IllegalAccessException cause) {
+        throw new GatewayException("Cannot parse the type '" + type.getName() + "'");
+      }
+    }
+
+    return parsedParameters;
   }
 
   @NonNull
