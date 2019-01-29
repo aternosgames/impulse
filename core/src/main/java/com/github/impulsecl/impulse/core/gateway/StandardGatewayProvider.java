@@ -29,8 +29,7 @@ public class StandardGatewayProvider implements GatewayProvider {
     this.addGatewayModel(gatewayModel);
   }
 
-  @Override
-  public void addGatewayModel(@NonNull GatewayModel gatewayModel) {
+  private void addGatewayModel(@NonNull GatewayModel gatewayModel) {
     Require.requireParamNonNull(gatewayModel, "gatewayModel");
 
     GATEWAY_MODEL_REGISTRY.addGatewayModel(gatewayModel);

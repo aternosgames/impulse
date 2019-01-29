@@ -9,8 +9,6 @@ public interface GatewayProvider {
 
   void loadGatewayModel(@NonNull Class<?> gatewayModelClass);
 
-  void addGatewayModel(@NonNull GatewayModel gatewayModel);
-
   @NonNull
   @CheckReturnValue
   Collection<GatewayModel> getGatewayModels();
