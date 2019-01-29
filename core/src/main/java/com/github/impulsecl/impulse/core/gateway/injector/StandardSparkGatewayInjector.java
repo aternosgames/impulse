@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.core.gateway.parser;
+package com.github.impulsecl.impulse.core.gateway.injector;
 
 import com.github.impulsecl.impulse.core.gateway.GatewayMethod;
 import com.github.impulsecl.impulse.core.gateway.GatewayModel;
@@ -15,16 +15,16 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class StandardSparkGatewayParser implements GatewayParser {
+public class StandardSparkGatewayInjector implements GatewayInjector {
 
   @NonNull
   @CheckReturnValue
-  public static GatewayParser create() {
-    return new StandardSparkGatewayParser();
+  public static GatewayInjector create() {
+    return new StandardSparkGatewayInjector();
   }
 
   @Override
-  public void parseGateway() {
+  public void injectGateway() {
     GatewayProvider gatewayProvider = StandardGatewayProvider.create();
 
     for (GatewayModel gatewayModel : gatewayProvider.getGatewayModels()) {
