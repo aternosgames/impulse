@@ -25,7 +25,7 @@ public class StandardGatewayProvider implements GatewayProvider {
 
     GatewayModelComposer gatewayModelComposer = StandardGatewayModelComposer.create();
 
-    GatewayModel gatewayModel = gatewayModelComposer.compileAll(gatewayModelClass);
+    GatewayModel gatewayModel = gatewayModelComposer.composeAll(gatewayModelClass);
     this.addGatewayModel(gatewayModel);
   }
 
