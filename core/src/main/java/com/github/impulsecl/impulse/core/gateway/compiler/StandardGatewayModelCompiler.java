@@ -56,7 +56,7 @@ public class StandardGatewayModelCompiler implements GatewayModelCompiler {
       if (method.isAnnotationPresent(Route.class)) {
         Route route = method.getAnnotation(Route.class);
 
-        Collection<Parameter> parameters = collectParameterAnnotations(method);
+        Collection<Parameter> parameters = this.collectParameterAnnotations(method);
 
         if (!(parameters.size() == method.getParameterCount())) {
           throw new GatewayException(method.getDeclaringClass().getName()
