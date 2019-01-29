@@ -2,6 +2,7 @@ package com.github.impulsecl.impulse.daemon.blueprint.deploy;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 import com.github.impulsecl.impulse.daemon.blueprint.config.BlueprintConfig;
+import com.github.impulsecl.impulse.daemon.blueprint.deploy.exception.BlueprintDeployerException;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.apache.commons.io.FileUtils;
