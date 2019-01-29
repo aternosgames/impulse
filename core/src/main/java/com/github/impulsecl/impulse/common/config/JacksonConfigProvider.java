@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.core.config;
+package com.github.impulsecl.impulse.common.config;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 
