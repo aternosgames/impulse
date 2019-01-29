@@ -14,11 +14,11 @@ import java.util.Map;
 public class BlueprintGatewayModel {
 
   @Route(name = "initBlueprint", requestKind = GatewayRequestKind.POST)
-  @Parameter(name = "name", type = String.class, optional = false)
-  @Parameter(name = "runOnDeployment", type = String.class, optional = false)
-  @Parameter(name = "runAfterKill", type = String.class, optional = false)
-  @Parameter(name = "environments", type = Map.class, optional = false)
-  @Parameter(name = "preserveFilesOnCrash", type = Boolean.class, optional = false)
+  @Parameter(name = "name", type = String.class)
+  @Parameter(name = "runOnDeployment", type = String.class)
+  @Parameter(name = "runAfterKill", type = String.class)
+  @Parameter(name = "environments", type = Map.class)
+  @Parameter(name = "preserveFilesOnCrash", type = Boolean.class)
   public void initBlueprint(
       @NonNull String name,
       @NonNull String runOnDeployment,
@@ -33,7 +33,7 @@ public class BlueprintGatewayModel {
   }
 
   @Route(name = "deleteBlueprint", requestKind = GatewayRequestKind.POST)
-  @Parameter(name = "name", type = String.class, optional = false)
+  @Parameter(name = "name", type = String.class)
   public void deleteBlueprint(@NonNull String name) {
     Require.requireParamNonNull(name, "name");
     //TODO: ADD AS JSON OBJECT AN RETURN VALUE

@@ -15,6 +15,4 @@ public @interface Parameter {
 
   Class<?> type();
 
-  boolean optional();
-
 }
