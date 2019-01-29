@@ -26,6 +26,8 @@ final class GatewayModelRegistry {
     GATEWAY_MODELS.add(gatewayModel);
   }
 
+  @NonNull
+  @CheckReturnValue
   Collection<GatewayModel> getGatewayModels() {
     return Collections.unmodifiableCollection(GATEWAY_MODELS);
   }

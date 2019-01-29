@@ -1,10 +1,13 @@
 package com.github.impulsecl.impulse.core.gateway.injector;
 
+import com.github.impulsecl.impulse.common.input.InputConverter;
+import com.github.impulsecl.impulse.common.input.InputConverters;
 import com.github.impulsecl.impulse.core.gateway.GatewayMethod;
 import com.github.impulsecl.impulse.core.gateway.GatewayModel;
 import com.github.impulsecl.impulse.core.gateway.GatewayProvider;
 import com.github.impulsecl.impulse.core.gateway.GatewayRequestKind;
 import com.github.impulsecl.impulse.core.gateway.StandardGatewayProvider;
+import com.github.impulsecl.impulse.core.gateway.annotation.Parameter;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -12,8 +15,7 @@ import spark.Spark;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Optional;
 
 public class StandardSparkGatewayInjector implements GatewayInjector {
 
@@ -28,32 +30,64 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
     GatewayProvider gatewayProvider = StandardGatewayProvider.create();
 
     for (GatewayModel gatewayModel : gatewayProvider.getGatewayModels()) {
-      Spark.path(gatewayModel.path(), () -> {
-        Collection<GatewayMethod> gatewayMethods = gatewayModel.gatewayMethods();
+      Collection<GatewayMethod> gatewayMethods = gatewayModel.gatewayMethods();
 
-        for (GatewayMethod gatewayMethod : gatewayMethods) {
-          GatewayRequestKind gatewayRequestKind = gatewayMethod.gatewayRequestKind();
+      for (GatewayMethod gatewayMethod : gatewayMethods) {
+        GatewayRequestKind gatewayRequestKind = gatewayMethod.gatewayRequestKind();
 
-          if (gatewayRequestKind.equals(GatewayRequestKind.POST)) {
-            Spark.post(gatewayMethod.route(), (request, response) -> {
-              response.header("Content-Type", "application/json");
+        if (gatewayRequestKind.equals(GatewayRequestKind.POST)) {
+          Spark.post(gatewayModel.path() + "/" + gatewayMethod.route(), (request, response) -> {
+            response.header("Content-Type", "application/json");
 
-              Map<String, Object> parametersAsMap = gatewayMethod.parameters();
-              Object[] parameters = new String[parametersAsMap.size()];
+            Collection<Parameter> parameterCollection = gatewayMethod.parameters();
 
-              int index = 0;
-              for (Entry<String, Object> entry : parametersAsMap.entrySet()) {
-                parameters[index] = request.params(entry.getKey());
+            Object[] parameters = new Object[parameterCollection.size()];
 
-                index++;
+            int index = 0;
+            for (Parameter parameter : parameterCollection) {
+              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+
+              if (query.isPresent()) {
+                InputConverter<?> inputConverter = query.get();
+                Object convertedObject = inputConverter.convert(request.queryMap().value(parameter.name()));
+
+                parameters[index] = convertedObject;
               }
-              Method method = gatewayMethod.method();
+              index++;
+            }
 
-              return method.invoke(method.getDeclaringClass().newInstance(), parameters);
-            });
-          }
+            Method method = gatewayMethod.method();
+
+            return method.invoke(method.getDeclaringClass().newInstance(), parameters);
+          });
+
+        } else if (gatewayRequestKind.equals(GatewayRequestKind.GET)) {
+          Spark.get(gatewayModel.path() + "/" + gatewayMethod.route(), (request, response) -> {
+            response.header("Content-Type", "application/json");
+
+            Collection<Parameter> parameterCollection = gatewayMethod.parameters();
+
+            Object[] parameters = new Object[parameterCollection.size()];
+
+            int index = 0;
+            for (Parameter parameter : parameterCollection) {
+              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+
+              if (query.isPresent()) {
+                InputConverter<?> inputConverter = query.get();
+                Object convertedObject = inputConverter.convert(request.queryMap().value(parameter.name()));
+
+                parameters[index] = convertedObject;
+              }
+              index++;
+            }
+
+            Method method = gatewayMethod.method();
+
+            return method.invoke(method.getDeclaringClass().newInstance(), parameters);
+          });
         }
-      });
+      }
     }
   }
 

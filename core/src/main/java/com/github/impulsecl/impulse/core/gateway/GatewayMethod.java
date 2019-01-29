@@ -1,12 +1,13 @@
 package com.github.impulsecl.impulse.core.gateway;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import com.github.impulsecl.impulse.core.gateway.annotation.Parameter;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
 import java.lang.reflect.Method;
-import java.util.Map;
+import java.util.Collection;
 
 public class GatewayMethod {
 
@@ -19,7 +20,7 @@ public class GatewayMethod {
   private String route;
   private GatewayRequestKind gatewayRequestKind;
   private Method method;
-  private Map<String, Object> parameters;
+  private Collection<Parameter> parameters;
 
   @NonNull
   public String route() {
@@ -57,13 +58,13 @@ public class GatewayMethod {
   }
 
   @NonNull
-  public Map<String, Object> parameters() {
+  public Collection<Parameter> parameters() {
     return this.parameters;
   }
 
   @NonNull
   @CheckReturnValue
-  public GatewayMethod parameters(@NonNull Map<String, Object> parameters) {
+  public GatewayMethod parameters(@NonNull Collection<Parameter> parameters) {
     this.parameters = Require.requireParamNonNull(parameters, "parameters");
     return this;
   }

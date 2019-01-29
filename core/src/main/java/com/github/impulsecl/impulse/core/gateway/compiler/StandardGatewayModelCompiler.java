@@ -70,33 +70,12 @@ public class StandardGatewayModelCompiler implements GatewayModelCompiler {
             .route(route.name())
             .gatewayRequestKind(route.requestKind())
             .method(method)
-            .parameters(this.parseParameters(parameters));
+            .parameters(parameters);
         loadedGatewayMethods.add(gatewayMethod);
       }
     }
 
     return loadedGatewayMethods;
-  }
-
-  @NonNull
-  @CheckReturnValue
-  private Map<String, Object> parseParameters(@NonNull Collection<Parameter> parameters) {
-    Require.requireParamNonNull(parameters, "parameters");
-
-    Map<String, Object> parsedParameters = new HashMap<>();
-
-    for (Parameter parameter : parameters) {
-      Class<?> type = parameter.type();
-
-      try {
-        Object object = type.newInstance();
-        parsedParameters.put(parameter.name(), object);
-      } catch (InstantiationException | IllegalAccessException cause) {
-        throw new GatewayException("Cannot parse the type '" + type.getName() + "'");
-      }
-    }
-
-    return parsedParameters;
   }
 
   @NonNull

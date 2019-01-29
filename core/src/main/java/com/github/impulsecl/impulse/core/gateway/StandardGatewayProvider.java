@@ -38,6 +38,7 @@ public class StandardGatewayProvider implements GatewayProvider {
 
   @NonNull
   @Override
+  @CheckReturnValue
   public Collection<GatewayModel> getGatewayModels() {
     return GATEWAY_MODEL_REGISTRY.getGatewayModels();
   }
