@@ -1,7 +1,7 @@
 package com.github.impulsecl.impulse.core.gateway.injector;
 
 import com.github.impulsecl.impulse.common.input.InputConverter;
-import com.github.impulsecl.impulse.common.input.InputConverters;
+import com.github.impulsecl.impulse.common.input.InputConverterRegistry;
 import com.github.impulsecl.impulse.core.gateway.GatewayMethod;
 import com.github.impulsecl.impulse.core.gateway.GatewayModel;
 import com.github.impulsecl.impulse.core.gateway.GatewayProvider;
@@ -45,7 +45,7 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
 
             int index = 0;
             for (Parameter parameter : parameterCollection) {
-              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+              Optional<InputConverter<?>> query = InputConverterRegistry.global().query(parameter.type());
 
               if (query.isPresent()) {
                 InputConverter<?> inputConverter = query.get();
@@ -70,7 +70,7 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
 
             int index = 0;
             for (Parameter parameter : parameterCollection) {
-              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+              Optional<InputConverter<?>> query = InputConverterRegistry.global().query(parameter.type());
 
               if (query.isPresent()) {
                 InputConverter<?> inputConverter = query.get();
@@ -95,7 +95,7 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
 
             int index = 0;
             for (Parameter parameter : parameterCollection) {
-              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+              Optional<InputConverter<?>> query = InputConverterRegistry.global().query(parameter.type());
 
               if (query.isPresent()) {
                 InputConverter<?> inputConverter = query.get();
@@ -120,7 +120,7 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
 
             int index = 0;
             for (Parameter parameter : parameterCollection) {
-              Optional<InputConverter<?>> query = InputConverters.query(parameter.type());
+              Optional<InputConverter<?>> query = InputConverterRegistry.global().query(parameter.type());
 
               if (query.isPresent()) {
                 InputConverter<?> inputConverter = query.get();

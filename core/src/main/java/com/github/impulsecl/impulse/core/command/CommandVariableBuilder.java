@@ -1,8 +1,8 @@
 package com.github.impulsecl.impulse.core.command;
 
+import com.github.impulsecl.impulse.common.input.InputConverterRegistry;
 import com.github.impulsecl.impulse.common.semantic.Require;
 import com.github.impulsecl.impulse.common.input.InputConverter;
-import com.github.impulsecl.impulse.common.input.InputConverters;
 
 import com.google.common.base.Preconditions;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
@@ -108,11 +108,12 @@ public class CommandVariableBuilder {
   public CommandVariableBuilder type(@NonNull Class<?> type) {
     Require.requireParamNonNull(type, "type");
 
-    if (InputConverters.query(type).isEmpty()) {
+    if (InputConverterRegistry.global().query(type).isEmpty()) {
       throw new IllegalStateException("Could not query input converter for type " + type.getName() + "!"
-          + " You can register a custom input converter by doing the following:\n"
+          + " You can add a custom input converter by doing the following:\n"
           + "   1. Implement one using the interface " + InputConverter.class.getName() + "\n"
-          + "   2. Register it by calling " + InputConverters.class.getName() + "#register(InputConverter<T>)");
+          + "   2. Register it by calling " + InputConverterRegistry.class.getName()
+          + ".global().add(InputConverter<T>)");
     }
 
     this.type = type;
