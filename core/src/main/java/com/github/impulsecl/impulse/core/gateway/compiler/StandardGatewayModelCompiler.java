@@ -15,7 +15,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StandardGatewayModelCompiler implements GatewayModelCompiler {
@@ -78,17 +80,17 @@ public class StandardGatewayModelCompiler implements GatewayModelCompiler {
 
   @NonNull
   @CheckReturnValue
-  private Collection<Object> parseParameters(@NonNull Collection<Parameter> parameters) {
+  private Map<String, Object> parseParameters(@NonNull Collection<Parameter> parameters) {
     Require.requireParamNonNull(parameters, "parameters");
 
-    List<Object> parsedParameters = new ArrayList<>();
+    Map<String, Object> parsedParameters = new HashMap<>();
 
     for (Parameter parameter : parameters) {
       Class<?> type = parameter.type();
 
       try {
         Object object = type.newInstance();
-        parsedParameters.add(object);
+        parsedParameters.put(parameter.name(), object);
       } catch (InstantiationException | IllegalAccessException cause) {
         throw new GatewayException("Cannot parse the type '" + type.getName() + "'");
       }
