@@ -30,7 +30,7 @@ public class StandardCommandModelComposer implements CommandModelComposer {
   @NonNull
   @Override
   @CheckReturnValue
-  public CommandModel compileModel(@NonNull Class<?> clazz) {
+  public CommandModel composeModel(@NonNull Class<?> clazz) {
     Require.requireParamNonNull(clazz, "clazz");
 
     if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers())) {
@@ -49,11 +49,11 @@ public class StandardCommandModelComposer implements CommandModelComposer {
     modelBuilder.label(model.label());
 
     Collection<Method> routingFunctions = this.collectRoutingFunctions(clazz);
-    Collection<CommandRoute> compiledRoutes = routingFunctions.stream()
-        .map(this::compileRoute)
+    Collection<CommandRoute> composedRoutes = routingFunctions.stream()
+        .map(this::composeRoute)
         .collect(Collectors.toList());
 
-    compiledRoutes.forEach(modelBuilder::route);
+    composedRoutes.forEach(modelBuilder::route);
 
     return modelBuilder.finish();
   }
@@ -61,7 +61,7 @@ public class StandardCommandModelComposer implements CommandModelComposer {
   @NonNull
   @Override
   @CheckReturnValue
-  public CommandRoute compileRoute(@NonNull Method method) {
+  public CommandRoute composeRoute(@NonNull Method method) {
     Require.requireParamNonNull(method, "method");
 
     if (!method.isAnnotationPresent(Route.class)) {
@@ -74,7 +74,7 @@ public class StandardCommandModelComposer implements CommandModelComposer {
         .name(route.name())
         .description(route.desc());
 
-    Collection<CommandVariable> commandVariables = this.compileVariables(method);
+    Collection<CommandVariable> commandVariables = this.composeVariables(method);
     commandVariables.forEach(routeBuilder::variable);
 
     return routeBuilder.finish();
@@ -83,7 +83,7 @@ public class StandardCommandModelComposer implements CommandModelComposer {
   @NonNull
   @Override
   @CheckReturnValue
-  public Collection<CommandVariable> compileVariables(@NonNull Method method) {
+  public Collection<CommandVariable> composeVariables(@NonNull Method method) {
     Require.requireParamNonNull(method, "method");
 
     Collection<Value> valueCollection = this.collectVariableAnnotations(method);
@@ -94,7 +94,7 @@ public class StandardCommandModelComposer implements CommandModelComposer {
     }
 
     Class<?>[] parameterTypes = method.getParameterTypes();
-    List<CommandVariable> compiledVariables = new ArrayList<>();
+    List<CommandVariable> composedVariables = new ArrayList<>();
 
     Value[] valueArray = new Value[valueCollection.size()];
     valueCollection.toArray(valueArray);
@@ -124,10 +124,10 @@ public class StandardCommandModelComposer implements CommandModelComposer {
         }
       }
 
-      compiledVariables.add(variableBuilder.finish());
+      composedVariables.add(variableBuilder.finish());
     }
 
-    return compiledVariables;
+    return composedVariables;
   }
 
   private Collection<Method> collectRoutingFunctions(Class<?> clazz) {

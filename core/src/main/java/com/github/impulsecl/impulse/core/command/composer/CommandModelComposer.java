@@ -23,7 +23,7 @@ public interface CommandModelComposer {
 
   @NonNull
   @CheckReturnValue
-  default Collection<CommandModel> compileAll(@NonNull Class<?>[] classes) {
+  default Collection<CommandModel> composeAll(@NonNull Class<?>[] classes) {
     Require.requireParamNonNull(classes, "classes");
 
     if (classes.length == 0) {
@@ -31,13 +31,13 @@ public interface CommandModelComposer {
     }
 
     return Arrays.stream(classes)
-        .map(this::compileModel)
+        .map(this::composeModel)
         .collect(Collectors.toList());
   }
 
   @NonNull
   @CheckReturnValue
-  default Collection<CommandModel> compileAll(@NonNull Collection<Class<?>> classes) {
+  default Collection<CommandModel> composeAll(@NonNull Collection<Class<?>> classes) {
     Require.requireParamNonNull(classes, "classes");
 
     if (classes.isEmpty()) {
@@ -45,20 +45,20 @@ public interface CommandModelComposer {
     }
 
     return classes.stream()
-        .map(this::compileModel)
+        .map(this::composeModel)
         .collect(Collectors.toList());
   }
 
   @NonNull
   @CheckReturnValue
-  CommandModel compileModel(@NonNull Class<?> clazz);
+  CommandModel composeModel(@NonNull Class<?> clazz);
 
   @NonNull
   @CheckReturnValue
-  CommandRoute compileRoute(@NonNull Method method);
+  CommandRoute composeRoute(@NonNull Method method);
 
   @NonNull
   @CheckReturnValue
-  Collection<CommandVariable> compileVariables(@NonNull Method method);
+  Collection<CommandVariable> composeVariables(@NonNull Method method);
 
 }
