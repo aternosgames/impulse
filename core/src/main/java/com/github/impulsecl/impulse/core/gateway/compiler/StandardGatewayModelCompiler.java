@@ -41,7 +41,7 @@ public class StandardGatewayModelCompiler implements GatewayModelCompiler {
     List<GatewayMethod> loadedGatewayMethods = this.compileGatewayMethods(gatewayModelClass);
 
     return GatewayModel.create()
-        .url(requestMapping.value())
+        .path(requestMapping.value())
         .gatewayMethods(loadedGatewayMethods);
   }
 

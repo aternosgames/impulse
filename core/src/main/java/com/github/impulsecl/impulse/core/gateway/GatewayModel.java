@@ -15,18 +15,18 @@ public class GatewayModel {
     return new GatewayModel();
   }
 
-  private String url;
+  private String path;
   private Collection<GatewayMethod> gatewayMethods;
 
   @NonNull
-  public String url() {
-    return this.url;
+  public String path() {
+    return this.path;
   }
 
   @NonNull
   @CheckReturnValue
-  public GatewayModel url(@NonNull String url) {
-    this.url = Require.requireParamNonNull(url, "url");
+  public GatewayModel path(@NonNull String path) {
+    this.path = Require.requireParamNonNull(path, "path");
     return this;
   }
 
