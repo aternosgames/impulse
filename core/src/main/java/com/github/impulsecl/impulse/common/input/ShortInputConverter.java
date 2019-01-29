@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.core.command.input;
+package com.github.impulsecl.impulse.common.input;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 
@@ -8,21 +8,21 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.Collection;
 import java.util.List;
 
-public class LongInputConverter implements InputConverter<Long> {
+public class ShortInputConverter implements InputConverter<Short> {
 
   @NonNull
   @Override
   @CheckReturnValue
-  public Long convert(@NonNull String input) {
+  public Short convert(@NonNull String input) {
     Require.requireParamNonNull(input, "input");
-    return Long.parseLong(input);
+    return Short.parseShort(input);
   }
 
   @NonNull
   @Override
   @CheckReturnValue
-  public Collection<Class<Long>> compatibleTypes() {
-    return List.of(long.class, Long.class);
+  public Collection<Class<Short>> compatibleTypes() {
+    return List.of(short.class, Short.class);
   }
 
 }

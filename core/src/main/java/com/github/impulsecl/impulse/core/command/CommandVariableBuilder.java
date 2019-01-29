@@ -1,8 +1,8 @@
 package com.github.impulsecl.impulse.core.command;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
-import com.github.impulsecl.impulse.core.command.input.InputConverter;
-import com.github.impulsecl.impulse.core.command.input.InputConverters;
+import com.github.impulsecl.impulse.common.input.InputConverter;
+import com.github.impulsecl.impulse.common.input.InputConverters;
 
 import com.google.common.base.Preconditions;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;

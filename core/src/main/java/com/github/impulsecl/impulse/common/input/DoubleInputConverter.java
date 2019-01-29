@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.core.command.input;
+package com.github.impulsecl.impulse.common.input;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 
@@ -8,21 +8,21 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.Collection;
 import java.util.List;
 
-public class BooleanInputConverter implements InputConverter<Boolean> {
+public class DoubleInputConverter implements InputConverter<Double> {
 
   @NonNull
   @Override
   @CheckReturnValue
-  public Boolean convert(String input) {
+  public Double convert(@NonNull String input) {
     Require.requireParamNonNull(input, "input");
-    return Boolean.parseBoolean(input);
+    return Double.parseDouble(input);
   }
 
   @NonNull
   @Override
   @CheckReturnValue
-  public Collection<Class<Boolean>> compatibleTypes() {
-    return List.of(boolean.class, Boolean.class);
+  public Collection<Class<Double>> compatibleTypes() {
+    return List.of(double.class, Double.class);
   }
 
 }

@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.core.command.input;
+package com.github.impulsecl.impulse.common.input;
 
 import java.util.Collection;
 
