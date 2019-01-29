@@ -1,6 +1,6 @@
 package com.github.impulsecl.impulse.core.gateway.annotation;
 
-import com.github.impulsecl.impulse.core.gateway.GatewayRequestKind;
+import com.github.impulsecl.impulse.core.gateway.RequestKind;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,6 +13,6 @@ public @interface Route {
 
   String name();
 
-  GatewayRequestKind requestKind();
+  RequestKind requestKind();
 
 }

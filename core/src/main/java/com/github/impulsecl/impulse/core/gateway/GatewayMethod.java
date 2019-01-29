@@ -18,7 +18,7 @@ public class GatewayMethod {
   }
 
   private String route;
-  private GatewayRequestKind gatewayRequestKind;
+  private RequestKind requestKind;
   private Method method;
   private Collection<Parameter> parameters;
 
@@ -35,14 +35,14 @@ public class GatewayMethod {
   }
 
   @NonNull
-  public GatewayRequestKind gatewayRequestKind() {
-    return this.gatewayRequestKind;
+  public RequestKind gatewayRequestKind() {
+    return this.requestKind;
   }
 
   @NonNull
   @CheckReturnValue
-  public GatewayMethod gatewayRequestKind(@NonNull GatewayRequestKind gatewayRequestKind) {
-    this.gatewayRequestKind = Require.requireParamNonNull(gatewayRequestKind, "gatewayRequestKind");
+  public GatewayMethod gatewayRequestKind(@NonNull RequestKind requestKind) {
+    this.requestKind = Require.requireParamNonNull(requestKind, "requestKind");
     return this;
   }
 

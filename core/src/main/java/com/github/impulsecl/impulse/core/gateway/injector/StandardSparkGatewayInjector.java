@@ -5,7 +5,7 @@ import com.github.impulsecl.impulse.common.input.InputConverters;
 import com.github.impulsecl.impulse.core.gateway.GatewayMethod;
 import com.github.impulsecl.impulse.core.gateway.GatewayModel;
 import com.github.impulsecl.impulse.core.gateway.GatewayProvider;
-import com.github.impulsecl.impulse.core.gateway.GatewayRequestKind;
+import com.github.impulsecl.impulse.core.gateway.RequestKind;
 import com.github.impulsecl.impulse.core.gateway.StandardGatewayProvider;
 import com.github.impulsecl.impulse.core.gateway.annotation.Parameter;
 
@@ -33,9 +33,9 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
       Collection<GatewayMethod> gatewayMethods = gatewayModel.gatewayMethods();
 
       for (GatewayMethod gatewayMethod : gatewayMethods) {
-        GatewayRequestKind gatewayRequestKind = gatewayMethod.gatewayRequestKind();
+        RequestKind requestKind = gatewayMethod.gatewayRequestKind();
 
-        if (gatewayRequestKind.equals(GatewayRequestKind.POST)) {
+        if (requestKind.equals(RequestKind.POST)) {
           Spark.post(gatewayModel.path() + "/" + gatewayMethod.route(), (request, response) -> {
             response.header("Content-Type", "application/json");
 
@@ -61,7 +61,7 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
             return method.invoke(method.getDeclaringClass().newInstance(), parameters);
           });
 
-        } else if (gatewayRequestKind.equals(GatewayRequestKind.GET)) {
+        } else if (requestKind.equals(RequestKind.GET)) {
           Spark.get(gatewayModel.path() + "/" + gatewayMethod.route(), (request, response) -> {
             response.header("Content-Type", "application/json");
 

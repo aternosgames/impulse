@@ -5,7 +5,7 @@ import com.github.impulsecl.impulse.core.gateway.GatewayException;
 import com.github.impulsecl.impulse.core.gateway.GatewayMethod;
 import com.github.impulsecl.impulse.core.gateway.GatewayModel;
 import com.github.impulsecl.impulse.core.gateway.annotation.Parameter;
-import com.github.impulsecl.impulse.core.gateway.annotation.RequestMapping;
+import com.github.impulsecl.impulse.core.gateway.annotation.RequestMap;
 import com.github.impulsecl.impulse.core.gateway.annotation.Route;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
@@ -15,9 +15,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StandardGatewayModelCompiler implements GatewayModelCompiler {
@@ -33,17 +31,17 @@ public class StandardGatewayModelCompiler implements GatewayModelCompiler {
   public GatewayModel compileAll(@NonNull Class<?> gatewayModelClass) {
     Require.requireParamNonNull(gatewayModelClass, "gatewayModelClass");
 
-    if (!gatewayModelClass.isAnnotationPresent(RequestMapping.class)) {
-      throw new GatewayException("Cannot find the annotation '" + RequestMapping.class.getName() + "' please add the "
+    if (!gatewayModelClass.isAnnotationPresent(RequestMap.class)) {
+      throw new GatewayException("Cannot find the annotation '" + RequestMap.class.getName() + "' please add the "
           + "annotation to request the mapping");
     }
 
-    RequestMapping requestMapping = gatewayModelClass.getAnnotation(RequestMapping.class);
+    RequestMap requestMap = gatewayModelClass.getAnnotation(RequestMap.class);
 
     List<GatewayMethod> loadedGatewayMethods = this.compileGatewayMethods(gatewayModelClass);
 
     return GatewayModel.create()
-        .path(requestMapping.value())
+        .path(requestMap.value())
         .gatewayMethods(loadedGatewayMethods);
   }
 
