@@ -7,6 +7,8 @@ import java.util.Collection;
 
 public interface GatewayProvider {
 
+  void loadGatewayModel(@NonNull Class<?> gatewayModelClass);
+
   void addGatewayModel(@NonNull GatewayModel gatewayModel);
 
   @NonNull

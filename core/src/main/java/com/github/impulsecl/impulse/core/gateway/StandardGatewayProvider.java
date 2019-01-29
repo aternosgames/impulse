@@ -1,6 +1,8 @@
 package com.github.impulsecl.impulse.core.gateway;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
+import com.github.impulsecl.impulse.core.gateway.compiler.GatewayModelCompiler;
+import com.github.impulsecl.impulse.core.gateway.compiler.StandardGatewayModelCompiler;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -15,6 +17,16 @@ public class StandardGatewayProvider implements GatewayProvider {
   @CheckReturnValue
   public static GatewayProvider create() {
     return new StandardGatewayProvider();
+  }
+
+  @Override
+  public void loadGatewayModel(@NonNull Class<?> gatewayModelClass) {
+    Require.requireParamNonNull(gatewayModelClass, "gatewayModelClass");
+
+    GatewayModelCompiler gatewayModelCompiler = StandardGatewayModelCompiler.create();
+
+    GatewayModel gatewayModel = gatewayModelCompiler.compileAll(gatewayModelClass);
+    this.addGatewayModel(gatewayModel);
   }
 
   @Override
