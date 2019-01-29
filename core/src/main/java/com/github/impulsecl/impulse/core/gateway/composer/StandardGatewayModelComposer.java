@@ -1,4 +1,4 @@
-package com.github.impulsecl.impulse.core.gateway.compiler;
+package com.github.impulsecl.impulse.core.gateway.composer;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
 import com.github.impulsecl.impulse.core.gateway.GatewayException;
@@ -18,12 +18,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StandardGatewayModelCompiler implements GatewayModelCompiler {
+public class StandardGatewayModelComposer implements GatewayModelComposer {
 
   @NonNull
   @CheckReturnValue
-  public static StandardGatewayModelCompiler create() {
-    return new StandardGatewayModelCompiler();
+  public static StandardGatewayModelComposer create() {
+    return new StandardGatewayModelComposer();
   }
 
   @NonNull
