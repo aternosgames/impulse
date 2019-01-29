@@ -13,11 +13,11 @@ public interface InputConverterRegistry extends InputConverterProvider {
     return SimpleInputConverterRegistry.GLOBAL;
   }
 
-  @CheckReturnValue
-  boolean add(@NonNull InputConverter<?> converter);
+  void addDefaults();
 
-  @CheckReturnValue
-  boolean remove(@NonNull InputConverter<?> converter);
+  void add(@NonNull InputConverter<?> converter);
+
+  void remove(@NonNull InputConverter<?> converter);
 
   @NonNull
   @CheckReturnValue

@@ -54,15 +54,30 @@ public class SimpleInputConverterRegistry implements InputConverterRegistry {
   }
 
   @Override
-  @CheckReturnValue
-  public boolean add(@NonNull InputConverter<?> converter) {
-    return this.boundConverters.add(converter);
+  public void addDefaults() {
+    this.add(new BooleanInputConverter());
+    this.add(new ByteInputConverter());
+    this.add(new DoubleInputConverter());
+    this.add(new FloatInputConverter());
+    this.add(new IntegerInputConverter());
+    this.add(new LongInputConverter());
+    this.add(new ShortInputConverter());
+    this.add(new StringInputConverter());
+    this.add(new UuidInputConverter());
   }
 
   @Override
   @CheckReturnValue
-  public boolean remove(@NonNull InputConverter<?> converter) {
-    return this.boundConverters.remove(converter);
+  public void add(@NonNull InputConverter<?> converter) {
+    Require.requireParamNonNull(converter, "converter");
+    this.boundConverters.add(converter);
+  }
+
+  @Override
+  @CheckReturnValue
+  public void remove(@NonNull InputConverter<?> converter) {
+    Require.requireParamNonNull(converter, "converter");
+    this.boundConverters.remove(converter);
   }
 
   @NonNull
