@@ -18,12 +18,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StandardGatewayCompiler implements GatewayModelCompiler {
+public class StandardGatewayModelCompiler implements GatewayModelCompiler {
 
   @NonNull
   @CheckReturnValue
-  public static StandardGatewayCompiler create() {
-    return new StandardGatewayCompiler();
+  public static StandardGatewayModelCompiler create() {
+    return new StandardGatewayModelCompiler();
   }
 
   @NonNull
