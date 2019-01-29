@@ -28,7 +28,7 @@ public class StandardGatewayModelComposer implements GatewayModelComposer {
 
   @NonNull
   @Override
-  public GatewayModel compileAll(@NonNull Class<?> gatewayModelClass) {
+  public GatewayModel composeAll(@NonNull Class<?> gatewayModelClass) {
     Require.requireParamNonNull(gatewayModelClass, "gatewayModelClass");
 
     if (!gatewayModelClass.isAnnotationPresent(RequestMap.class)) {
@@ -38,7 +38,7 @@ public class StandardGatewayModelComposer implements GatewayModelComposer {
 
     RequestMap requestMap = gatewayModelClass.getAnnotation(RequestMap.class);
 
-    List<GatewayMethod> loadedGatewayMethods = this.compileGatewayMethods(gatewayModelClass);
+    List<GatewayMethod> loadedGatewayMethods = this.composeGatewayMethods(gatewayModelClass);
 
     return GatewayModel.create()
         .path(requestMap.value())
@@ -47,7 +47,7 @@ public class StandardGatewayModelComposer implements GatewayModelComposer {
 
   @NonNull
   @CheckReturnValue
-  private List<GatewayMethod> compileGatewayMethods(@NonNull Class<?> gatewayModelClass) {
+  private List<GatewayMethod> composeGatewayMethods(@NonNull Class<?> gatewayModelClass) {
     Require.requireParamNonNull(gatewayModelClass, "gatewayModelClass");
 
     List<GatewayMethod> loadedGatewayMethods = new ArrayList<>();
