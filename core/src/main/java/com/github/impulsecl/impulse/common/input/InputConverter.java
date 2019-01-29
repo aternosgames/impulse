@@ -9,7 +9,7 @@ public interface InputConverter<T> {
 
   @NonNull
   @CheckReturnValue
-  T convert(String input);
+  T convert(@NonNull String input);
 
   @NonNull
   @CheckReturnValue

@@ -13,7 +13,7 @@ public class BooleanInputConverter implements InputConverter<Boolean> {
   @NonNull
   @Override
   @CheckReturnValue
-  public Boolean convert(String input) {
+  public Boolean convert(@NonNull String input) {
     Require.requireParamNonNull(input, "input");
     return Boolean.parseBoolean(input);
   }
