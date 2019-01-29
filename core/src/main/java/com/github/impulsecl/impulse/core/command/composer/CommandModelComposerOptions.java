@@ -1,9 +1,9 @@
-package com.github.impulsecl.impulse.core.command.compiler;
+package com.github.impulsecl.impulse.core.command.composer;
 
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
-public class CommandModelCompilerOptions {
+public class CommandModelComposerOptions {
 
   public static class CommandModelCompilerOptionsBuilder {
 
@@ -18,8 +18,8 @@ public class CommandModelCompilerOptions {
 
     @NonNull
     @CheckReturnValue
-    public CommandModelCompilerOptions finish() {
-      return new CommandModelCompilerOptions(this);
+    public CommandModelComposerOptions finish() {
+      return new CommandModelComposerOptions(this);
     }
 
   }
@@ -31,6 +31,6 @@ public class CommandModelCompilerOptions {
   }
 
   @CheckReturnValue
-  protected CommandModelCompilerOptions(@NonNull CommandModelCompilerOptionsBuilder builder) {}
+  protected CommandModelComposerOptions(@NonNull CommandModelCompilerOptionsBuilder builder) {}
 
 }

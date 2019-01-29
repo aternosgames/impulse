@@ -1,9 +1,7 @@
 package com.github.impulsecl.impulse.core.command;
 
 import com.github.impulsecl.impulse.common.semantic.Require;
-import com.github.impulsecl.impulse.core.command.compiler.StandardCommandModelCompiler;
 
-import com.google.common.base.CharMatcher;
 import com.google.common.base.Preconditions;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -12,7 +10,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class CommandRouteBuilder {
 
