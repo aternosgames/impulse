@@ -1,12 +1,16 @@
 package com.github.impulsecl.impulse.swarm;
 
 import com.github.impulsecl.impulse.common.config.ConfigProvider;
+import com.github.impulsecl.impulse.core.gateway.injector.GatewayInjector;
+import com.github.impulsecl.impulse.core.gateway.injector.StandardSparkGatewayInjector;
 import com.github.impulsecl.impulse.core.stage.Stage;
 import com.github.impulsecl.impulse.swarm.config.GatewayConfig;
 import com.github.impulsecl.impulse.swarm.config.SwarmServiceConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import spark.Filter;
+import spark.Spark;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,6 +20,8 @@ import java.util.Optional;
 public class SwarmStartPipeline {
 
   private static final Logger LOGGER = LogManager.getLogger(SwarmStartPipeline.class);
+
+  private SwarmServiceConfig swarmServiceConfig;
 
   @Stage(0)
   public void interpretSwarm() {
@@ -28,8 +34,6 @@ public class SwarmStartPipeline {
 
     Path swarmConfigPath = Paths.get("swarm.config");
     ConfigProvider configProvider = ConfigProvider.jackson();
-
-    SwarmServiceConfig swarmServiceConfig;
 
     if (!swarmConfigPath.toFile().exists()) {
       swarmServiceConfig = SwarmServiceConfig.create()
@@ -56,6 +60,25 @@ public class SwarmStartPipeline {
         throw new RuntimeException("Cannot load the '" + SwarmServiceConfig.class.getName() + "' class!");
       }
     }
+  }
+
+  @Stage(2)
+  public void initializeGateway() {
+    LOGGER.info("Initializing the Gateway...");
+
+    Spark.port(swarmServiceConfig.gatewayConfig().port());
+    Spark.before((Filter) (request, response) -> {
+      String apiKey = request.queryMap().get("apiKey").value();
+
+      if (!apiKey.equalsIgnoreCase(swarmServiceConfig.gatewayConfig().authorizeKey())) {
+        response.status(401);
+      }
+    });
+
+    //TODO: ADD THE GATEWAYS
+
+    GatewayInjector gatewayInjector = StandardSparkGatewayInjector.create();
+    gatewayInjector.injectGateway();
   }
 
 }
