@@ -52,7 +52,8 @@ final class ExtensionIndexLoader {
             try {
               urlClassLoader = new URLClassLoader(new URL[]{servicePath.toFile().toURI().toURL()});
             } catch (MalformedURLException cause) {
-              throw new ExtensionIndexException(cause);
+              throw new ExtensionIndexException(
+                  "Cannot load the url from the file " + servicePath.toFile().getName() + "'");
             }
 
             while (jarEntryEnumeration.hasMoreElements()) {
@@ -70,7 +71,7 @@ final class ExtensionIndexLoader {
               try {
                 clazz = urlClassLoader.loadClass(targetClassName);
               } catch (ClassNotFoundException cause) {
-                throw new ExtensionIndexException(cause);
+                throw new ExtensionIndexException("Cannot load the class '" + targetClassName + "'");
               }
 
               if (clazz.isAnnotationPresent(ExtensionMetadata.class)) {
@@ -78,7 +79,7 @@ final class ExtensionIndexLoader {
                 try {
                   extension = (Extension) clazz.newInstance();
                 } catch (InstantiationException | IllegalAccessException cause) {
-                  throw new ExtensionIndexException(cause);
+                  throw new ExtensionIndexException("Cannot invoke the class '" + targetClassName + "'");
                 }
 
                 ExtensionMetadata extensionMetadata = clazz.getAnnotation(ExtensionMetadata.class);
