@@ -14,6 +14,6 @@ import java.util.function.Consumer;
 
 public interface IndexLoader {
 
-  void loadIndex(@NonNull Path path, @NonNull Consumer<List<Class<?>>> targetClassNameConsumer);
+  void loadIndex(@NonNull Path path, @NonNull Consumer<List<Class<?>>> classesConsumer);
 
 }
