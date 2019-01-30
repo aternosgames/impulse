@@ -21,6 +21,21 @@ public class BlueprintGatewayModel {
     //TODO: ADD AS JSON OBJECT AN RETURN VALUE
   }
 
+  @Route(name = "addParameter", requestKind = RequestKind.POST)
+  @Parameter(name = "name", type = String.class)
+  @Parameter(name = "key", type = String.class)
+  @Parameter(name = "value", type = String.class)
+  public void addParameter(String name, String key, String value) {
+    //TODO: ADD AS JSON OBJECT AN RETURN VALUE
+  }
+
+  @Route(name = "deleteParameter", requestKind = RequestKind.DELETE)
+  @Parameter(name = "name", type = String.class)
+  @Parameter(name = "key", type = String.class)
+  public void deleteParameter(String name, String key) {
+    //TODO: ADD AS JSON OBJECT AN RETURN VALUE
+  }
+
   @Route(name = "deleteBlueprint", requestKind = RequestKind.DELETE)
   @Parameter(name = "name", type = String.class)
   private void deleteBlueprint(String name) {
