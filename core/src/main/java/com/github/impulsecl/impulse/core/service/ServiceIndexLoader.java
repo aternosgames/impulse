@@ -54,7 +54,8 @@ final class ServiceIndexLoader {
             try {
               urlClassLoader = new URLClassLoader(new URL[]{servicePath.toFile().toURI().toURL()});
             } catch (MalformedURLException cause) {
-              throw new ServiceIndexException(cause);
+              throw new ServiceIndexException(
+                  "Cannot load the url from the file " + servicePath.toFile().getName() + "'");
             }
 
             while (jarEntryEnumeration.hasMoreElements()) {
@@ -72,7 +73,7 @@ final class ServiceIndexLoader {
               try {
                 clazz = urlClassLoader.loadClass(targetClassName);
               } catch (ClassNotFoundException cause) {
-                throw new ServiceIndexException(cause);
+                throw new ServiceIndexException("Cannot load the class '" + targetClassName + "'");
               }
 
               if (clazz.isAnnotationPresent(ServiceMetadata.class)) {
