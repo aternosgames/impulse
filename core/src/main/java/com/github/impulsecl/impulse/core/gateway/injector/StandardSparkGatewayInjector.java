@@ -16,15 +16,18 @@ import com.github.impulsecl.impulse.core.gateway.RequestKind;
 import com.github.impulsecl.impulse.core.gateway.StandardGatewayProvider;
 import com.github.impulsecl.impulse.core.gateway.annotation.Parameter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.umd.cs.findbugs.annotations.CheckReturnValue;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 
 public class StandardSparkGatewayInjector implements GatewayInjector {
@@ -76,26 +79,33 @@ public class StandardSparkGatewayInjector implements GatewayInjector {
 
     Collection<Parameter> parameterCollection = gatewayMethod.parameters();
     Object[] parameters = new Object[parameterCollection.size()];
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    Map<String, String> map;
+    try {
+      map = objectMapper.readValue(request.body(), Map.class);
+    } catch (IOException cause) {
+      throw new RuntimeException(cause);
+    }
 
     int index = 0;
     for (Parameter parameter : parameterCollection) {
       Optional<InputConverter<?>> query = InputConverterRegistry.global().query(parameter.type());
-
       if (query.isPresent()) {
         InputConverter<?> inputConverter = query.get();
-        Object convertedObject = inputConverter.convert(request.queryMap().value(parameter.name()));
+        Object convertedObject = inputConverter.convert(map.get(parameter.name()));
 
         parameters[index] = convertedObject;
       }
-      index++;
-    }
 
-    Method method = gatewayMethod.method();
+      Method method = gatewayMethod.method();
 
-    try {
-      return Optional.of(method.invoke(method.getDeclaringClass().newInstance(), parameters));
-    } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-      e.printStackTrace();
+      try {
+        return Optional.of(method.invoke(method.getDeclaringClass().newInstance(), parameters));
+      } catch (IllegalAccessException | InstantiationException | InvocationTargetException cause) {
+        throw new RuntimeException(cause);
+      }
+
     }
 
     return Optional.empty();
